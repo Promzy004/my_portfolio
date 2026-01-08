@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import {  Route, Routes } from "react-router-dom"
-import Home from "./components/pages/Home"
-import About from "./components/pages/About"
+import Home from "./pages/Home"
+import About from "./pages/About"
 import RouteChangeProgress from "./ProgressBar"
 import Navigation from "./components/GlobalComponents/Navigation/Navigation"
-import Docs from "./components/pages/Docs"
-import CV from "./components/pages/CV"
+import Docs from "./pages/Docs"
+import CV from "./pages/CV"
 import ThemeToggleBtn from "./components/GlobalComponents/ThemeToggler/ThemeToggleBtn"
-import DevelopmentProjects from "./components/pages/DevelopmentProjects"
-import DesignProjects from "./components/pages/DesignProjects"
+import DevelopmentProjects from "./pages/DevelopmentProjects"
+import WordpressProjects from "./pages/WordpressProjects"
 
 function App () {
   const [ darkMode, setDarkMode ] = useState<boolean>(false)
@@ -51,7 +51,7 @@ function App () {
         <Route path="/my-docs" element={<Docs />} />
         <Route path="/cv" element={<CV />} />
         <Route path="/development" element={<DevelopmentProjects darkMode={darkMode} />} />
-        <Route path="/design" element={<DesignProjects darkMode={darkMode} />} />
+        <Route path="/wordpress" element={<WordpressProjects darkMode={darkMode} />} />
         <Route path="*" element={<div>page not found</div>} />
       </Routes>
     </div>

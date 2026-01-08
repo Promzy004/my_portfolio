@@ -552,9 +552,9 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                         background: 'conic-gradient(from 91deg at 50.23%, #0E6DB6 37.51646250486374deg, #0984E3 135.70844650268555deg, #0E6DB6 222.439284324646deg, #0984E3 320.4205298423767deg)',
                                         boxShadow: '-6px -4px 2px 0 rgba(0, 0, 0, 0.30) inset'
                                     }}
-                                    onClick={() => navigateTo('/design')}
+                                    onClick={() => navigateTo('/wordpress')}
                                 >
-                                    <span>Design</span>
+                                    <span>Wordpress</span>
                                     <FaArrowRight />
                                 </button>
                             </motion.div>

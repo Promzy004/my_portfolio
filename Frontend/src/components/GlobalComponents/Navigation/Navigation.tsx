@@ -35,7 +35,7 @@ const Navigation: React.FC<NavigationProps> = ({ darkMode }) => {
         },
         {
             icon: DesignIcon,
-            path: '/design'
+            path: '/wordpress'
         },
         {
             icon: CVIcon,
@@ -54,9 +54,9 @@ const Navigation: React.FC<NavigationProps> = ({ darkMode }) => {
             allowedPaths = ['/', '/cv', '/development']
             break;
         case '/development':
-            allowedPaths = ['/', '/about', '/design']
+            allowedPaths = ['/', '/about', '/wordpress']
             break;
-        case '/design':
+        case '/wordpress':
             allowedPaths = ['/', '/about', '/development']
             break;
         case '/cv':

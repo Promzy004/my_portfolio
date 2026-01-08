@@ -8,16 +8,11 @@ interface ProjectCardProps {
     projectTags: string[]
     projectLink: string
     projectDesc: string
-    text: string
 }
 
-const ProjectCard: React.FC <ProjectCardProps> = ({darkMode, projectImage, projectName, projectDate, projectTags, projectLink, projectDesc, text}) => {
+const ProjectCard: React.FC <ProjectCardProps> = ({darkMode, projectImage, projectName, projectDate, projectTags, projectLink, projectDesc }) => {
     return (
         <div className="relative overflow-hidden h-full bg-white w-full rounded-[20px]">
-
-            <button className="absolute top-4 left-4 px-3 py-2 bg-white hover:scale-105 transition-all duration-500 z-20 rounded-xl text-sm">
-                {text}
-            </button>
 
             {/* project image */}
             <div className="h-[180px] sm:h-[230px] cursor-pointer overflow-hidden">

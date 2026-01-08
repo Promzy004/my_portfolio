@@ -15,12 +15,12 @@ const socialHandles: ISocialHandles[] = [
     },
     {
         social: 'LinkendIn',
-        link: '',
+        link: 'https://www.linkedin.com/in/edwin-promise-a73b822b6/',
         icon: Icons.LinkendIn
     },
     {
         social: 'Github',
-        link: '',
+        link: 'https://github.com/Promzy004',
         icon: Icons.Github
     },
     {
@@ -30,7 +30,7 @@ const socialHandles: ISocialHandles[] = [
     },
     {
         social: 'Twitter',
-        link: '',
+        link: 'https://x.com/promzy_004',
         icon: Icons.Twitter
     },
 ]

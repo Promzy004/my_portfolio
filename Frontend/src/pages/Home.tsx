@@ -1,11 +1,11 @@
 import type React from "react"
-import email_black from "../../assets/svg/Home/email-black.svg"
-import phone_black from "../../assets/svg/Home/phone-black.svg"
-import phone_white from "../../assets/svg/Home/phone-white.svg"
-import email_white from "../../assets/svg/Home/email-white.svg"
-import Footer from "../PageComponents/Home/Footer"
-import DesktopHomeCard from "../PageComponents/Home/DesktopHomeCard"
-import MobileHomeCard from "../PageComponents/Home/MobileHomeCard"
+import email_black from "../assets/svg/Home/email-black.svg"
+import phone_black from "../assets/svg/Home/phone-black.svg"
+import phone_white from "../assets/svg/Home/phone-white.svg"
+import email_white from "../assets/svg/Home/email-white.svg"
+import Footer from "../components/PageComponents/Home/Footer"
+import DesktopHomeCard from "../components/PageComponents/Home/DesktopHomeCard"
+import MobileHomeCard from "../components/PageComponents/Home/MobileHomeCard"
 
 
 interface HomeProps {

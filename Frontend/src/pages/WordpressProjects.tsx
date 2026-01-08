@@ -1,10 +1,10 @@
-import ProjectCard from "../PageComponents/Projects/ProjectCard";
-import { projects } from "../../data/Projects";
+import ProjectCard from "../components/PageComponents/Projects/ProjectCard";
+import { projects } from "../data/Projects";
 import { AnimatePresence, motion } from "framer-motion";
 
-const DesignProjects = ({darkMode}: {darkMode: boolean}) => {
+const WordpressProjects = ({darkMode}: {darkMode: boolean}) => {
 
-    const filteredProjects = projects.filter(project => (project.category).toLowerCase() === "design")
+    const filteredProjects = projects.filter(project => (project.category).toLowerCase() === "wordpress")
 
     return (
         <div className="max-w-screen-xl lg:w-[1024px] mx-auto py-10 sm:px-7 flex flex-col w-full gap-10">
@@ -17,7 +17,7 @@ const DesignProjects = ({darkMode}: {darkMode: boolean}) => {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.4, ease: "easeInOut" }}
                     >
-                        Design Projects
+                        Wordpress Projects
                     </motion.h2>
                     <motion.p 
                         className="text-base sm:text-lg"
@@ -45,7 +45,6 @@ const DesignProjects = ({darkMode}: {darkMode: boolean}) => {
                                     transition={{ duration: 0.4, delay: index * 0.05 }}
                                 >
                                     <ProjectCard 
-                                        text="See developer for this job"
                                         darkMode={darkMode} 
                                         projectImage={project.image} 
                                         projectName={project.name} 
@@ -65,7 +64,7 @@ const DesignProjects = ({darkMode}: {darkMode: boolean}) => {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3 }}
                         >
-                            No project for at this moment ...
+                            No project at this moment ...
                         </motion.div>
                     }
                 </AnimatePresence>
@@ -74,4 +73,4 @@ const DesignProjects = ({darkMode}: {darkMode: boolean}) => {
     );
 }
 
-export default DesignProjects;
+export default WordpressProjects;
