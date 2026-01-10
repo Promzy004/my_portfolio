@@ -28,3 +28,80 @@
     overflow: hidden;
   }
 }
+
+
+
+/* =======================================================
+   SKILLS SECTION (Badge Grid with Inline SVGs)
+   ======================================================= */
+
+.skills-badge-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-items: start;
+  align-items: center;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.skill-badge {
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #333;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: default;
+  opacity: 1;
+  animation: scaleIn 0.7s ease-out forwards;
+}
+
+.skill-badge svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.skill-badge:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 4px var(--glow-color);
+}
+
+/* Brand hover glow colors */
+.skill-badge.react { --glow-color: #61dafb; }
+.skill-badge.tailwind { --glow-color: #38bdf8; }
+.skill-badge.js { --glow-color: #f7df1e; }
+.skill-badge.ts { --glow-color: #3178c6; }
+.skill-badge.bootstrap { --glow-color:  #7952B3; }
+.skill-badge.html { --glow-color: #e34c26; }
+.skill-badge.css { --glow-color: #264de4; }
+.skill-badge.php { --glow-color: #777bb3; }
+.skill-badge.laravel { --glow-color: #ff2d20; }
+.skill-badge.python { --glow-color: #3776ab; }
+.skill-badge.go { --glow-color: #00add8; }
+.skill-badge.mysql { --glow-color: #F29111; }
+.skill-badge.git { --glow-color: #f1502f; }
+.skill-badge.github { --glow-color: #181717; }
+.skill-badge.wordpress { --glow-color: #00749C; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .skills-badge-grid {
+    gap: 0.6rem;
+  }
+
+  .skill-badge {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .skill-badge svg {
+    width: 18px;
+    height: 18px;
+  }
+}
