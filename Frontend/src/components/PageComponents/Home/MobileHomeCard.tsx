@@ -412,7 +412,7 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                 boxShadow: `${darkMode ? '-1px -1px 2px 0 rgba(255, 255, 255, 0.25), 1px 1px 2px 0px rgba(255, 255, 255, 0.25)' : '-1px -1px 2px 0 rgba(0, 0, 0, 0.50), 1px 1px 2px 0 rgba(0, 0, 0, 0.50)'}`
                             }}
                         >
-                            <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/f0250ad9330584cddba35df423e7d09cdc4b39d5_twouls.jpg" alt="" className="object-cover h-full w-full" />
+                            <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/f0250ad9330584cddba35df423e7d09cdc4b39d5_twouls.jpg" alt="" loading="lazy" className="object-cover h-full w-full" />
                         </div>
                         <button 
                             className="flex justify-between items-center gap-3 py-[10px] px-4 w-full rounded-full text-[10px] xxs:text-xs sm:text-base text-nowrap font-semibold text-white"
@@ -442,7 +442,7 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                 boxShadow: `${darkMode ? '-1px -1px 2px 0 rgba(255, 255, 255, 0.25), 1px 1px 2px 0px rgba(255, 255, 255, 0.25)' : '-1px -1px 2px 0 rgba(0, 0, 0, 0.50), 1px 1px 2px 0 rgba(0, 0, 0, 0.50)'}`
                             }}
                         >
-                            <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/f0250ad9330584cddba35df423e7d09cdc4b39d5_twouls.jpg" alt="" className="object-cover h-full w-full" />
+                            <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1768085040/a5d7b2a9b05a518d58c239b1bc39a550a664ed05_jswjv8.jpg" alt="" loading="lazy" className="object-cover h-full w-full" />
                         </div>
                         <button 
                             className="flex justify-between items-center py-[10px] px-4 w-full rounded-full text-[10px] xxs:text-sm sm:text-base text-nowrap font-semibold text-white"
@@ -472,7 +472,7 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                 boxShadow: `${darkMode ? '-1px -1px 2px 0 rgba(255, 255, 255, 0.25), 1px 1px 2px 0px rgba(255, 255, 255, 0.25)' : '-1px -1px 2px 0 rgba(0, 0, 0, 0.50), 1px 1px 2px 0 rgba(0, 0, 0, 0.50)'}`
                             }}
                         >
-                            <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/f0250ad9330584cddba35df423e7d09cdc4b39d5_twouls.jpg" alt="" className="object-cover h-full w-full" />
+                            <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1768085040/db8fb204d05c82e0f4e8cf801c3ee747b0630d8b_ey71ho.jpg" alt="" loading="lazy" className="object-cover h-full w-full" />
                         </div>
                         <button 
                             className="flex justify-between items-center py-[10px] px-4 w-full rounded-full text-[10px] xxs:text-sm sm:text-base text-nowrap font-semibold text-white"
@@ -514,7 +514,7 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                         boxShadow: `${darkMode ? '-1px -1px 2px 0 rgba(255, 255, 255, 0.25), 1px 1px 2px 0px rgba(255, 255, 255, 0.25)' : '-1px -1px 2px 0 rgba(0, 0, 0, 0.50), 1px 1px 2px 0 rgba(0, 0, 0, 0.50)'}`
                                     }}
                                 >
-                                    <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/6901011bb2147330146c0cbac33af1f211fef8a8_hmllcr.jpg" alt="" className="object-cover h-full w-full" />
+                                    <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/6901011bb2147330146c0cbac33af1f211fef8a8_hmllcr.jpg" alt="" loading="lazy" className="object-cover h-full w-full" />
                                 </div>
                                 <button 
                                     className="flex justify-between items-center gap-3 py-[10px] px-4 w-full rounded-full text-[10px] xxs:text-sm sm:text-base text-nowrap font-semibold text-white"
@@ -544,7 +544,7 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                         boxShadow: `${darkMode ? '-1px -1px 2px 0 rgba(255, 255, 255, 0.25), 1px 1px 2px 0px rgba(255, 255, 255, 0.25)' : '-1px -1px 2px 0 rgba(0, 0, 0, 0.50), 1px 1px 2px 0 rgba(0, 0, 0, 0.50)'}`
                                     }}
                                 >
-                                    <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/6901011bb2147330146c0cbac33af1f211fef8a8_hmllcr.jpg" alt="" className="object-cover h-full w-full" />
+                                    <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/6901011bb2147330146c0cbac33af1f211fef8a8_hmllcr.jpg" alt="" loading="lazy" className="object-cover h-full w-full" />
                                 </div>
                                 <button 
                                     className="flex justify-between items-center py-[10px] px-4 w-full rounded-full text-[10px] xxs:text-sm sm:text-base text-nowrap font-semibold text-white"
@@ -574,7 +574,7 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                         boxShadow: `${darkMode ? '-1px -1px 2px 0 rgba(255, 255, 255, 0.25), 1px 1px 2px 0px rgba(255, 255, 255, 0.25)' : '-1px -1px 2px 0 rgba(0, 0, 0, 0.50), 1px 1px 2px 0 rgba(0, 0, 0, 0.50)'}`
                                     }}
                                 >
-                                    <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/6901011bb2147330146c0cbac33af1f211fef8a8_hmllcr.jpg" alt="" className="object-cover h-full w-full" />
+                                    <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1768085040/6ddd586032538bcb458a4eab4891ac3a37f65299_vrznz7.jpg" alt="" loading="lazy" className="object-cover h-full w-full" />
                                 </div>
                                 <button 
                                     className="flex justify-between items-center py-[10px] px-4 w-full rounded-full text-[10px] xxs:text-sm sm:text-base text-nowrap font-semibold text-white"
