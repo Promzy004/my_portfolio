@@ -49,10 +49,10 @@ function App () {
         <Route path="/" element={<Home darkMode={darkMode} />} />
         <Route path="/about" element={<About />} />
         <Route path="/my-docs" element={<Docs />} />
-        <Route path="/cv" element={<CV />} />
+        {/* <Route path="/cv" element={<CV />} /> */}
         <Route path="/web-projects" element={<WebProjects darkMode={darkMode} />} />
         <Route path="/mobile-app-projects" element={<MobileProjects darkMode={darkMode} />} />
-        <Route path="*" element={<div>page not found</div>} />
+        <Route path="*" element={<div className="mt-[50vh]">page not available or under development</div>} />
       </Routes>
     </div>
   )
