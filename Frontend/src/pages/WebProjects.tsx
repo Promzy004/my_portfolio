@@ -2,11 +2,9 @@ import ProjectCard from "../components/PageComponents/Projects/ProjectCard";
 import { projects } from "../data/Projects";
 import { AnimatePresence, motion } from "framer-motion";
 
-const DevelopmentProjects = ({darkMode}: {darkMode: boolean}) => {
+const WebProjects = ({darkMode}: {darkMode: boolean}) => {
 
-    // const filteredProjects = projects.filter(project => project.stack === (activeStack.split(' ')[0]))
-
-    const filteredProjects = projects.filter(project => (project.category).toLowerCase() === "development")
+    const filteredProjects = projects.filter(project => (project.category).toLowerCase() === "web")
 
     return (
         <div className="max-w-screen-xl lg:w-[1024px] mx-auto py-10 sm:px-7 flex flex-col w-full gap-10">
@@ -30,7 +28,7 @@ const DevelopmentProjects = ({darkMode}: {darkMode: boolean}) => {
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                         >
-                            I'm a full stack developer. I've been a fanatic of computers since time immemorial, and i loved math (I can't figure out why I don't love it anymore). Anyways, i wrote my first line of code in 2019! thanks to zuck. I'm a yapper and introvert who writes less, so here is my blog . I hope i soon talk less and write more!
+                            Here are some web apps I've built. Each one tackles a different problem or idea I wanted to explore. Check them out and see what I've been working on.
                         </motion.p>
                     </div>
                 </AnimatePresence>
@@ -79,4 +77,4 @@ const DevelopmentProjects = ({darkMode}: {darkMode: boolean}) => {
     );
 }
 
-export default DevelopmentProjects;
+export default WebProjects;

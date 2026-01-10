@@ -2,9 +2,9 @@ import ProjectCard from "../components/PageComponents/Projects/ProjectCard";
 import { projects } from "../data/Projects";
 import { AnimatePresence, motion } from "framer-motion";
 
-const WordpressProjects = ({darkMode}: {darkMode: boolean}) => {
+const MobileProjects = ({darkMode}: {darkMode: boolean}) => {
 
-    const filteredProjects = projects.filter(project => (project.category).toLowerCase() === "wordpress")
+    const filteredProjects = projects.filter(project => (project.category).toLowerCase() === "mobile")
 
     return (
         <div className="max-w-screen-xl lg:w-[1024px] mx-auto py-10 sm:px-7 flex flex-col w-full gap-10">
@@ -17,7 +17,7 @@ const WordpressProjects = ({darkMode}: {darkMode: boolean}) => {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.4, ease: "easeInOut" }}
                     >
-                        Wordpress Projects
+                        Projects
                     </motion.h2>
                     <motion.p 
                         className="text-base sm:text-lg"
@@ -25,7 +25,7 @@ const WordpressProjects = ({darkMode}: {darkMode: boolean}) => {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.4, ease: "easeInOut" }}
                     >
-                        I'm a full stack developer. I've been a fanatic of computers since time immemorial, and i loved math (I can't figure out why I don't love it anymore). Anyways, i wrote my first line of code in 2019! thanks to zuck. I'm a yapper and introvert who writes less, so here is my blog . I hope i soon talk less and write more!
+                        Mobile apps I've created to bring ideas to life on the go. Each project showcases different features and solutions I've experimented with. Take a look around.
                     </motion.p>
                 </div>
                 <AnimatePresence mode="wait" initial={false}>
@@ -73,4 +73,4 @@ const WordpressProjects = ({darkMode}: {darkMode: boolean}) => {
     );
 }
 
-export default WordpressProjects;
+export default MobileProjects;

@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react"
-import {  Route, Routes } from "react-router-dom"
-import Home from "./pages/Home"
-import About from "./pages/About"
-import RouteChangeProgress from "./ProgressBar"
-import Navigation from "./components/GlobalComponents/Navigation/Navigation"
-import Docs from "./pages/Docs"
 import CV from "./pages/CV"
+import Home from "./pages/Home"
+import Docs from "./pages/Docs"
+import About from "./pages/About"
+import { useEffect, useState } from "react"
+import WebProjects from "./pages/WebProjects"
+import RouteChangeProgress from "./ProgressBar"
+import {  Route, Routes } from "react-router-dom"
+import MobileProjects from "./pages/MobileProjects"
+import Navigation from "./components/GlobalComponents/Navigation/Navigation"
 import ThemeToggleBtn from "./components/GlobalComponents/ThemeToggler/ThemeToggleBtn"
-import DevelopmentProjects from "./pages/DevelopmentProjects"
-import WordpressProjects from "./pages/WordpressProjects"
 
 function App () {
   const [ darkMode, setDarkMode ] = useState<boolean>(false)
@@ -50,8 +50,8 @@ function App () {
         <Route path="/about" element={<About />} />
         <Route path="/my-docs" element={<Docs />} />
         <Route path="/cv" element={<CV />} />
-        <Route path="/development" element={<DevelopmentProjects darkMode={darkMode} />} />
-        <Route path="/wordpress" element={<WordpressProjects darkMode={darkMode} />} />
+        <Route path="/web-projects" element={<WebProjects darkMode={darkMode} />} />
+        <Route path="/mobile-app-projects" element={<MobileProjects darkMode={darkMode} />} />
         <Route path="*" element={<div>page not found</div>} />
       </Routes>
     </div>

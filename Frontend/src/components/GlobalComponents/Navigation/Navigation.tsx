@@ -31,11 +31,11 @@ const Navigation: React.FC<NavigationProps> = ({ darkMode }) => {
         },
         {
             icon: DevelopmentIcon,
-            path: '/development'
+            path: '/web-projects'
         },
         {
             icon: DesignIcon,
-            path: '/wordpress'
+            path: '/mobile-app-projects'
         },
         {
             icon: CVIcon,
@@ -48,19 +48,19 @@ const Navigation: React.FC<NavigationProps> = ({ darkMode }) => {
     let allowedPaths: string[] = [];
     switch (currentPath) {
         case "/":
-            allowedPaths = ['/about', '/development', '/cv']
+            allowedPaths = ['/about', '/web-projects', '/cv']
             break;
         case '/about':
-            allowedPaths = ['/', '/cv', '/development']
+            allowedPaths = ['/', '/cv', '/web-projects']
             break;
-        case '/development':
-            allowedPaths = ['/', '/about', '/wordpress']
+        case '/web-projects':
+            allowedPaths = ['/', '/about', '/mobile-app-projects']
             break;
-        case '/wordpress':
-            allowedPaths = ['/', '/about', '/development']
+        case '/mobile-app-projects':
+            allowedPaths = ['/', '/about', '/web-projects']
             break;
         case '/cv':
-            allowedPaths = ['/', '/about', '/development']
+            allowedPaths = ['/', '/about', '/web-projects']
             break;
         default:
             allowedPaths = []

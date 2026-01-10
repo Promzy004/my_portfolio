@@ -6,7 +6,7 @@ export interface IProjects {
     tags: string[],
     desc: string,
     image: string,
-    stack: string,
+    stack?: string,
     category: string
 } 
 
@@ -20,7 +20,7 @@ export const projects: IProjects[] = [
         desc: 'loremfnmfnmfnmfnfmnfnfmnmfnmfmfnfmnfmnfmnfnmfnmfnfmnmfnmfnmfnmfnmfnfbfnfbnbfnbfnfbbnfbnbfnbfnbfnbfnbfnbfnbfnfbnbfnbfnbfnbfnbfnbfnbfnbfnbfnfbnfbnfbnfbnfbnfbfnbnfbnfbnfbnfbfbfnbf',
         image: 'https://res.cloudinary.com/dto6lwmss/image/upload/v1756564996/3f8f3811bef793146ffa534969fb6c7f656cd41b_hzrwbx.jpg',
         stack: 'Front-End',
-        category: 'development'
+        category: 'mobile'
     },
     {
         id: 2,
@@ -31,7 +31,7 @@ export const projects: IProjects[] = [
         desc: 'loremfnmfnmfnmfnfmnfnfmnmfnmfmfnfmnfmnfmnfnmfnmfnfmnmfnmfnmfnmfnmfn',
         image: 'https://res.cloudinary.com/dto6lwmss/image/upload/v1756564996/3f8f3811bef793146ffa534969fb6c7f656cd41b_hzrwbx.jpg',
         stack: 'Back-End',
-        category: 'development'
+        category: 'web'
     },
     {
         id: 3,
@@ -42,7 +42,7 @@ export const projects: IProjects[] = [
         desc: 'loremfnmfnmfnmfnfmnfnfmnmfnmfmfnfmnfmnfmnfnmfnmfnfmnmfnmfnmfnmfnmfn',
         image: 'https://res.cloudinary.com/dto6lwmss/image/upload/v1756564996/3f8f3811bef793146ffa534969fb6c7f656cd41b_hzrwbx.jpg',
         stack: 'Back-End',
-        category: 'development'
+        category: 'web'
     },
     {
         id: 4,
@@ -53,7 +53,7 @@ export const projects: IProjects[] = [
         desc: 'loremfnmfnmfnmfnfmnfnfmnmfnmfmfnfmnfmnfmnfnmfnmfnfmnmfnmfnmfnmfnmfn',
         image: 'https://res.cloudinary.com/dto6lwmss/image/upload/v1756564996/3f8f3811bef793146ffa534969fb6c7f656cd41b_hzrwbx.jpg',
         stack: 'Back-End',
-        category: 'development'
+        category: 'web'
     },
     {
         id: 5,
@@ -64,6 +64,6 @@ export const projects: IProjects[] = [
         desc: 'loremfnmfnmfnmfnfmnfnfmnmfnmfmfnfmnfmnfmnfnmfnmfnfmnmfnmfnmfnmfnmfn',
         image: 'https://res.cloudinary.com/dto6lwmss/image/upload/v1756564996/3f8f3811bef793146ffa534969fb6c7f656cd41b_hzrwbx.jpg',
         stack: 'Design',
-        category: 'design'
+        category: 'web'
     },
 ]
