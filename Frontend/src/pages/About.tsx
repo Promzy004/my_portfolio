@@ -15,7 +15,7 @@ const About = () => {
                             While my current projects have been primarily for learning purposes, each one has strengthened my problem-solving abilities and deepened my understanding of full-stack architecture. I'm focused on broadening my expertise into cloud computing and DevOps, aiming to build scalable, reliable systems that bridge development and operations seamlessly.
                         </p>
                         <p>
-                            When I'm not coding, you'll find me unwinding with movies or diving into video games—both of which inspire creativity and strategic thinking in unexpected ways.
+                            When I'm not coding, you'll find me unwinding with movies or diving into video games, both of which inspire creativity and strategic thinking in unexpected ways.
                         </p>
                     </div>
                 </div>

@@ -100,6 +100,7 @@ const Navigation: React.FC<NavigationProps> = ({ darkMode }) => {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.3, delay: 0.2 }}
                         exit={{ opacity: 0 }}
+                        onClick={() => setShowNav(false)}
                     ></motion.div>
                 )}
             </AnimatePresence>
