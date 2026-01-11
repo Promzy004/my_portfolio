@@ -13,9 +13,9 @@ export default {
         black: "#000000",
       },
       fontFamily: {
-        spaceGrotesk: ["Space Grotesk", 'sans-serif'],
-        montserrat: ["Montserrat", 'sans-serif'],
-        mullish: ["Mulish", 'sans-serif']
+        spaceGrotesk: ["Space Grotesk", 'system-ui', 'sans-serif'], // Added system-ui
+        montserrat: ["Montserrat", 'system-ui', 'sans-serif'],      // Added system-ui
+        mullish: ["Mulish", 'system-ui', 'sans-serif']              // Added system-ui
       },
       fontSize: {
         'xs': '.75rem',
@@ -41,4 +41,3 @@ export default {
     },
   },
 }
-

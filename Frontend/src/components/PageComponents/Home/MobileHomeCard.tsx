@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useAnimation} from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { optimizeCloudinaryImage } from "../../../utils/cloudinary";
 
 interface IHomeProps {
     darkMode: boolean
@@ -394,6 +395,7 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                   className={`relative`}
                   style={{
                     height: !expand ? `${(leftCardHeight * 2) + 20}px` : undefined,
+                    minHeight: '200px'
                   }}
                 >
                     <motion.div 
@@ -409,10 +411,20 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                         <div 
                             className="h-[72px] xxs:h-[76px] xs:h-[90px] sm:h-[115px] w-[72px] xxs:w-[76px] xs:w-[90px] sm:w-[115px] border-[6px] border-[#D9D7D7] dark:border-[#302F2F] rounded-full overflow-hidden"
                             style={{
+                                aspectRatio: '1/1',
                                 boxShadow: `${darkMode ? '-1px -1px 2px 0 rgba(255, 255, 255, 0.25), 1px 1px 2px 0px rgba(255, 255, 255, 0.25)' : '-1px -1px 2px 0 rgba(0, 0, 0, 0.50), 1px 1px 2px 0 rgba(0, 0, 0, 0.50)'}`
                             }}
                         >
-                            <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/f0250ad9330584cddba35df423e7d09cdc4b39d5_twouls.jpg" alt="" loading="lazy" className="object-cover h-full w-full" />
+                            <img 
+                                src={optimizeCloudinaryImage(
+                                    "https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/f0250ad9330584cddba35df423e7d09cdc4b39d5_twouls.jpg",
+                                    115, // max width from sm:w-[115px]
+                                    115  // max height from sm:h-[115px]
+                                )} 
+                                alt="About Me" 
+                                loading="lazy" 
+                                className="object-cover h-full w-full" 
+                            />
                         </div>
                         <button 
                             className="flex justify-between items-center gap-3 py-[10px] px-4 w-full rounded-full text-[10px] xxs:text-xs sm:text-base text-nowrap font-semibold text-white"
@@ -439,10 +451,19 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                         <div 
                             className="h-[72px] xxs:h-[76px] xs:h-[90px] sm:h-[115px] w-[72px] xxs:w-[76px] xs:w-[90px] sm:w-[115px] border-[6px] border-[#D9D7D7] dark:border-[#302F2F] rounded-full overflow-hidden"
                             style={{
+                                aspectRatio: '1/1',
                                 boxShadow: `${darkMode ? '-1px -1px 2px 0 rgba(255, 255, 255, 0.25), 1px 1px 2px 0px rgba(255, 255, 255, 0.25)' : '-1px -1px 2px 0 rgba(0, 0, 0, 0.50), 1px 1px 2px 0 rgba(0, 0, 0, 0.50)'}`
                             }}
                         >
-                            <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1768085040/a5d7b2a9b05a518d58c239b1bc39a550a664ed05_jswjv8.jpg" alt="" loading="lazy" className="object-cover h-full w-full" />
+                            <img 
+                                src={optimizeCloudinaryImage(
+                                    "https://res.cloudinary.com/dto6lwmss/image/upload/v1768085040/a5d7b2a9b05a518d58c239b1bc39a550a664ed05_jswjv8.jpg",
+                                    115, 115
+                                )} 
+                                alt="Me" 
+                                loading="lazy" 
+                                className="object-cover h-full w-full" 
+                            />
                         </div>
                         <button 
                             className="flex justify-between items-center py-[10px] px-4 w-full rounded-full text-[10px] xxs:text-sm sm:text-base text-nowrap font-semibold text-white"
@@ -469,10 +490,19 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                         <div 
                             className="h-[72px] xxs:h-[76px] xs:h-[90px] sm:h-[115px] w-[72px] xxs:w-[76px] xs:w-[90px] sm:w-[115px] border-[6px] border-[#D9D7D7] dark:border-[#302F2F] rounded-full overflow-hidden"
                             style={{
+                                aspectRatio: '1/1',
                                 boxShadow: `${darkMode ? '-1px -1px 2px 0 rgba(255, 255, 255, 0.25), 1px 1px 2px 0px rgba(255, 255, 255, 0.25)' : '-1px -1px 2px 0 rgba(0, 0, 0, 0.50), 1px 1px 2px 0 rgba(0, 0, 0, 0.50)'}`
                             }}
                         >
-                            <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1768085040/db8fb204d05c82e0f4e8cf801c3ee747b0630d8b_ey71ho.jpg" alt="" loading="lazy" className="object-cover h-full w-full" />
+                            <img 
+                                src={optimizeCloudinaryImage(
+                                    "https://res.cloudinary.com/dto6lwmss/image/upload/v1768085040/db8fb204d05c82e0f4e8cf801c3ee747b0630d8b_ey71ho.jpg",
+                                    115, 115
+                                )} 
+                                alt="CV" 
+                                loading="lazy" 
+                                className="object-cover h-full w-full" 
+                            />
                         </div>
                         <button 
                             className="flex justify-between items-center py-[10px] px-4 w-full rounded-full text-[10px] xxs:text-sm sm:text-base text-nowrap font-semibold text-white"
@@ -496,6 +526,7 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                             className={`relative`}
                             style={{
                                 height: !expandRight ? `${(rightCardHeight * 2) + 20}px` : undefined,
+                                minHeight: '200px'
                             }}
                         >
                             <motion.div 
@@ -511,10 +542,19 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                 <div 
                                     className="h-[72px] xxs:h-[76px] xs:h-[90px] sm:h-[115px] w-[72px] xxs:w-[76px] xs:w-[90px] sm:w-[115px] border-[6px] border-[#D9D7D7] dark:border-[#302F2F] rounded-full overflow-hidden"
                                     style={{
+                                        aspectRatio: '1/1',
                                         boxShadow: `${darkMode ? '-1px -1px 2px 0 rgba(255, 255, 255, 0.25), 1px 1px 2px 0px rgba(255, 255, 255, 0.25)' : '-1px -1px 2px 0 rgba(0, 0, 0, 0.50), 1px 1px 2px 0 rgba(0, 0, 0, 0.50)'}`
                                     }}
                                 >
-                                    <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/6901011bb2147330146c0cbac33af1f211fef8a8_hmllcr.jpg" alt="" loading="lazy" className="object-cover h-full w-full" />
+                                    <img 
+                                        src={optimizeCloudinaryImage(
+                                            "https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/6901011bb2147330146c0cbac33af1f211fef8a8_hmllcr.jpg",
+                                            115, 115
+                                        )} 
+                                        alt="Projects" 
+                                        loading="lazy" 
+                                        className="object-cover h-full w-full" 
+                                    />
                                 </div>
                                 <button 
                                     className="flex justify-between items-center gap-3 py-[10px] px-4 w-full rounded-full text-[10px] xxs:text-sm sm:text-base text-nowrap font-semibold text-white"
@@ -541,10 +581,19 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                 <div 
                                     className="h-[72px] xxs:h-[76px] xs:h-[90px] sm:h-[115px] w-[72px] xxs:w-[76px] xs:w-[90px] sm:w-[115px] border-[6px] border-[#D9D7D7] dark:border-[#302F2F] rounded-full overflow-hidden"
                                     style={{
+                                        aspectRatio: '1/1',
                                         boxShadow: `${darkMode ? '-1px -1px 2px 0 rgba(255, 255, 255, 0.25), 1px 1px 2px 0px rgba(255, 255, 255, 0.25)' : '-1px -1px 2px 0 rgba(0, 0, 0, 0.50), 1px 1px 2px 0 rgba(0, 0, 0, 0.50)'}`
                                     }}
                                 >
-                                    <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/6901011bb2147330146c0cbac33af1f211fef8a8_hmllcr.jpg" alt="" loading="lazy" className="object-cover h-full w-full" />
+                                    <img 
+                                        src={optimizeCloudinaryImage(
+                                            "https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/6901011bb2147330146c0cbac33af1f211fef8a8_hmllcr.jpg",
+                                            115, 115
+                                        )} 
+                                        alt="Mobile App Projects" 
+                                        loading="lazy" 
+                                        className="object-cover h-full w-full" 
+                                    />
                                 </div>
                                 <button 
                                     className="flex justify-between items-center py-[10px] px-4 w-full rounded-full text-[10px] xxs:text-sm sm:text-base text-nowrap font-semibold text-white"
@@ -571,10 +620,19 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                 <div 
                                     className="h-[72px] xxs:h-[76px] xs:h-[90px] sm:h-[115px] w-[72px] xxs:w-[76px] xs:w-[90px] sm:w-[115px] border-[6px] border-[#D9D7D7] dark:border-[#302F2F] rounded-full overflow-hidden"
                                     style={{
+                                        aspectRatio: '1/1',
                                         boxShadow: `${darkMode ? '-1px -1px 2px 0 rgba(255, 255, 255, 0.25), 1px 1px 2px 0px rgba(255, 255, 255, 0.25)' : '-1px -1px 2px 0 rgba(0, 0, 0, 0.50), 1px 1px 2px 0 rgba(0, 0, 0, 0.50)'}`
                                     }}
                                 >
-                                    <img src="https://res.cloudinary.com/dto6lwmss/image/upload/v1768085040/6ddd586032538bcb458a4eab4891ac3a37f65299_vrznz7.jpg" alt="" loading="lazy" className="object-cover h-full w-full" />
+                                    <img 
+                                        src={optimizeCloudinaryImage(
+                                            "https://res.cloudinary.com/dto6lwmss/image/upload/v1768085040/6ddd586032538bcb458a4eab4891ac3a37f65299_vrznz7.jpg",
+                                            115, 115
+                                        )} 
+                                        alt="Web Projects" 
+                                        loading="lazy" 
+                                        className="object-cover h-full w-full" 
+                                    />
                                 </div>
                                 <button 
                                     className="flex justify-between items-center py-[10px] px-4 w-full rounded-full text-[10px] xxs:text-sm sm:text-base text-nowrap font-semibold text-white"

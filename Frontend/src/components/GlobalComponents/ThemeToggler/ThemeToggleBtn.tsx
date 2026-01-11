@@ -13,6 +13,8 @@ const ThemeToggleBtn: React.FC<ToggleBtnProps> = ({ darkMode, setDarkMode }) => 
 
   return (
     <div 
+      role="group"
+      aria-label="Theme selector"
       className="flex items-center gap-2 z-[9999] fixed bottom-[70px] xs:bottom-[100px] right-5 xs:right-8 rounded-full w-max px-1 border bg-[#EAEAEA33] border-[#44444433] dark:bg-[#FFFFFF1A] dark:border-[#FFFFFF33] backdrop-blur-md"
       style={{
         boxShadow: darkMode
@@ -23,6 +25,7 @@ const ThemeToggleBtn: React.FC<ToggleBtnProps> = ({ darkMode, setDarkMode }) => 
       <div className="flex items-center gap-2 relative w-full ">
         {/* Sliding Background Circle */}
         <div 
+          aria-hidden="true"
           className={`absolute top-1 left-1 w-8 h-[calc(100%-8px)] rounded-full transition-transform duration-300 ease-in-out ${
             darkMode ? 'bg-[#191919]' : 'bg-[#fff]'
           }`}
@@ -37,10 +40,12 @@ const ThemeToggleBtn: React.FC<ToggleBtnProps> = ({ darkMode, setDarkMode }) => 
           onClick={() => setDarkMode(false)}
           className="relative z-10 p-2 w-10 h-10 flex items-center justify-center transition-all duration-300"
           aria-label="Switch to light mode"
+          aria-pressed={!darkMode}
         >
           <img 
             src={!darkMode ? light_active : light_not_active} 
-            alt="Light mode" 
+            alt="" 
+            aria-hidden="true"
             className="w-6 h-6"
           />
         </button>
@@ -50,10 +55,12 @@ const ThemeToggleBtn: React.FC<ToggleBtnProps> = ({ darkMode, setDarkMode }) => 
           onClick={() => setDarkMode(true)}
           className="relative z-10 p-2 w-10 h-10 flex items-center justify-center transition-all duration-300"
           aria-label="Switch to dark mode"
+          aria-pressed={darkMode}
         >
           <img 
             src={darkMode ? dark_active : dark_not_active} 
-            alt="Dark mode" 
+            alt="" 
+            aria-hidden="true"
             className="w-6 h-6"
           />
         </button>

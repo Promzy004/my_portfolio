@@ -9,7 +9,8 @@ interface NavigationProps {
 
 interface INavLinks {
     icon: React.ComponentType<React.SVGProps<SVGSVGElement>>,
-    path: string
+    path: string,
+    label: string  // Added for accessibility
 }
 
 const Navigation: React.FC<NavigationProps> = ({ darkMode }) => {
@@ -23,23 +24,28 @@ const Navigation: React.FC<NavigationProps> = ({ darkMode }) => {
     const navLinks: INavLinks[] = [
         {
             icon: HomeIcon,
-            path: '/'
+            path: '/',
+            label: 'Home'
         },
         {
             icon: AboutIcon,
-            path: '/about'
+            path: '/about',
+            label: 'About'
         },
         {
             icon: DevelopmentIcon,
-            path: '/web-projects'
+            path: '/web-projects',
+            label: 'Web Projects'
         },
         {
             icon: DesignIcon,
-            path: '/mobile-app-projects'
+            path: '/mobile-app-projects',
+            label: 'Mobile App Projects'
         },
         {
             icon: CVIcon,
-            path: '/cv'
+            path: '/cv',
+            label: 'CV'
         },
     ]
 
@@ -74,6 +80,7 @@ const Navigation: React.FC<NavigationProps> = ({ darkMode }) => {
     //get active page so as to get active page icon
     const activePage = navLinks.find((link) => link.path === currentPath);
     const ActiveIcon = activePage?.icon || HomeIcon;
+    const activeLabel = activePage?.label || 'Home';
 
     
 
@@ -107,6 +114,8 @@ const Navigation: React.FC<NavigationProps> = ({ darkMode }) => {
             <div className="sticky z-40 top-[20px] xs:top-[25px] w-full h-full flex flex-col justify-center items-center">
                 {/* nav links toggle button */}
                 <button 
+                    aria-label={showNav ? "Close navigation menu" : `Open navigation menu - Currently on ${activeLabel} page`}
+                    aria-expanded={showNav}
                     className="w-[50px] h-[50px] flex justify-center items-center z-50 rounded-2xl p-[10px] border-[1px] bg-[#FFFFFF33] border-[#888888] dark:bg-[#302F2FB2] dark:border-[#888888] backdrop-blur-md"
                     style={{
                         boxShadow: `${darkMode ? "-3.111px -3.111px 3.111px 0 rgba(255, 255, 255, 0.10) inset, 3.111px 3.111px 3.111px 0 rgba(255, 255, 255, 0.10) inset" : "-3.111px -3.111px 3.111px 0 rgba(0, 0, 0, 0.10) inset, 3.111px 3.111px 3.111px 0 rgba(0, 0, 0, 0.10) inset"}`
@@ -119,6 +128,7 @@ const Navigation: React.FC<NavigationProps> = ({ darkMode }) => {
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
+                            aria-hidden="true"
                         >
                             <circle
                                 className="opacity-25"
@@ -137,9 +147,9 @@ const Navigation: React.FC<NavigationProps> = ({ darkMode }) => {
                         :
                         <>
                             {showNav ? 
-                                <CancelIcon className="w-5 h-5" />
+                                <CancelIcon className="w-5 h-5" aria-hidden="true" />
                                 :
-                                <ActiveIcon className="w-7 h-7" />
+                                <ActiveIcon className="w-7 h-7" aria-hidden="true" />
                             }
                         </>
                     }
@@ -150,6 +160,8 @@ const Navigation: React.FC<NavigationProps> = ({ darkMode }) => {
                     {showNav && (
                         <>
                             <motion.div 
+                                role="navigation"
+                                aria-label="Main navigation"
                                 className="flex gap-10 sm:gap-20 z-40 absolute top-20 xs:top-24 rounded-3xl w-max py-[30px] px-6 border-[0.5px] dark:bg-[#FFFFFF1A] dark:border-[#FFFFFF33] backdrop-blur-sm"
                                 style={{
                                     boxShadow: `${darkMode ? "-4px -4px 4px 0 rgba(255, 255, 255, 0.05) inset, 4px 4px 4px 0 rgba(255, 255, 255, 0.05) inset" : "0 1px 2px 0 rgba(0, 0, 0, 0.10), 0 -1px 2px 0 rgba(0, 0, 0, 0.10) inset;"}`,
@@ -163,13 +175,14 @@ const Navigation: React.FC<NavigationProps> = ({ darkMode }) => {
                                 {filteredLinks.map((navlink, index) => (
                                     <button 
                                         key={index}
+                                        aria-label={`Navigate to ${navlink.label}`}
                                         className="w-max rounded-2xl p-[10px] border-[1px] bg-[#FFFFFF33] border-[#888888] dark:bg-[#302F2FB2] dark:border-[#888888] backdrop-blur-md"
                                         style={{
                                             boxShadow: `${darkMode ? "-3.111px -3.111px 3.111px 0 rgba(255, 255, 255, 0.10) inset, 3.111px 3.111px 3.111px 0 rgba(255, 255, 255, 0.10) inset" : "-3.111px -3.111px 3.111px 0 rgba(0, 0, 0, 0.10) inset, 3.111px 3.111px 3.111px 0 rgba(0, 0, 0, 0.10) inset"}`
                                         }}
                                         onClick={() => handleNavLink(navlink.path)}
                                     >
-                                        <navlink.icon className="w-7 h-7" />
+                                        <navlink.icon className="w-7 h-7" aria-hidden="true" />
                                     </button>
                                 ))}
                             </motion.div>
