@@ -1,4 +1,5 @@
 import type React from "react";
+import { optimizeCloudinaryImage } from "../../../utils/cloudinary";
 
 interface ProjectCardProps {
     darkMode: boolean
@@ -16,7 +17,12 @@ const ProjectCard: React.FC <ProjectCardProps> = ({darkMode, projectImage, proje
 
             {/* project image */}
             <div className="h-[180px] sm:h-[230px] cursor-pointer overflow-hidden">
-                <img loading="lazy" src={projectImage} alt="" className="w-full h-full object-cover transition-all duration-500 hover:scale-105" />
+                <img                     
+                    src={projectImage}
+                    alt={`image of ${projectName} project`}
+                    loading="lazy" 
+                    className="w-full h-full object-cover transition-all duration-500 hover:scale-105" 
+                />
             </div>
 
             {/* project details */}
@@ -51,7 +57,7 @@ const ProjectCard: React.FC <ProjectCardProps> = ({darkMode, projectImage, proje
                     {projectTags.map((tag, index) => (
                         <span 
                             key={index}
-                            className="bg-[#E1E5E8] dark:bg-[#302F2F] rounded-[12px] text-xs font-normal px-3 py-2"
+                            className="bg-[#E1E5E8] dark:bg-[#302F2F] rounded-[12px] text-xs font-normal px-3 py-1"
                             style={{
                                 boxShadow: `${darkMode ? "-4px -4px 4px 0 rgba(255, 255, 255, 0.05) inset, 4px 4px 4px 0 rgba(255, 255, 255, 0.05) inset" : "-4px -4px 4px 0 rgba(0, 0, 0, 0.05) inset, 4px 4px 4px 0 rgba(0, 0, 0, 0.05) inset"}`
                             }}

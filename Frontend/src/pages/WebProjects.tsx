@@ -28,7 +28,7 @@ const WebProjects = ({darkMode}: {darkMode: boolean}) => {
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                         >
-                            Here are some web apps I've built. Each one tackles a different problem or idea I wanted to explore. Check them out and see what I've been working on.
+                            Here are some web projects I've built and collaborated on. Each one tackles a different problem or idea I wanted to explore. Check them out and see what I've been working on.
                         </motion.p>
                     </div>
                 </AnimatePresence>
