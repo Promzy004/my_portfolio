@@ -52,7 +52,7 @@ function App () {
         {/* <Route path="/cv" element={<CV />} /> */}
         <Route path="/web-projects" element={<WebProjects darkMode={darkMode} />} />
         <Route path="/mobile-app-projects" element={<MobileProjects darkMode={darkMode} />} />
-        <Route path="*" element={<div className="mt-[50vh]">page not available or under development</div>} />
+        <Route path="*" element={<div className="mt-[20vh] text-center flex flex-col gap-3 items-center">page not available or under development <br /> <a href="/" className="bg-primary py-1 px-3 text-white hover:scale-105 transition-all duration-300">Back to home page</a></div>} />
       </Routes>
     </div>
   )
