@@ -1,5 +1,4 @@
 import type React from "react";
-import { optimizeCloudinaryImage } from "../../../utils/cloudinary";
 
 interface ProjectCardProps {
     darkMode: boolean
