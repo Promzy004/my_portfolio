@@ -1,4 +1,4 @@
-import CV from "./pages/CV"
+// import CV from "./pages/CV"
 import Home from "./pages/Home"
 import Docs from "./pages/Docs"
 import About from "./pages/About"
