@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const CV = () => {
     // State to store the PDF file path
-    const [cvUrl] = useState<string>('Nnameka_CV.pdf');
+    const [cvUrl] = useState<string>('EDWIN PROMISE.pdf');
     
     // State to track total number of pages in the PDF
     const [totalPages, setTotalPages] = useState<number>(0);

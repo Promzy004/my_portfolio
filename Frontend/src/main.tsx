@@ -4,12 +4,15 @@ import './index.css'
 import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import AnalyticsTracker from './AnalyticsTracker.tsx'
+import { HelmetProvider } from 'react-helmet-async'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <AnalyticsTracker />
-      <App />
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <AnalyticsTracker />
+        <App />
+      </BrowserRouter>
+    </HelmetProvider>
   </StrictMode>,
 )

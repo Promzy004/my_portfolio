@@ -1,15 +1,15 @@
-import { lazy, Suspense, useEffect, useState } from "react"
 import { Route, Routes } from "react-router-dom"
 import RouteChangeProgress from "./ProgressBar"
+import { lazy, Suspense, useEffect, useState } from "react"
 import Navigation from "./components/GlobalComponents/Navigation/Navigation"
 import ThemeToggleBtn from "./components/GlobalComponents/ThemeToggler/ThemeToggleBtn"
 
 // Lazy load all pages (except critical ones if needed)
 const Home = lazy(() => import("./pages/Home"))
 const About = lazy(() => import("./pages/About"))
-const Docs = lazy(() => import("./pages/Docs"))
 const WebProjects = lazy(() => import("./pages/WebProjects"))
 const MobileProjects = lazy(() => import("./pages/MobileProjects"))
+const CV = lazy(() => import("./pages/CV"))
 
 function App () {
   const [ darkMode, setDarkMode ] = useState<boolean>(false)
@@ -53,9 +53,10 @@ function App () {
           <Routes>
             <Route path="/" element={<Home darkMode={darkMode} />} />
             <Route path="/about" element={<About />} />
-            <Route path="/my-docs" element={<Docs />} />
+            {/* <Route path="/my-docs" element={<Docs />} /> */}
             <Route path="/web-projects" element={<WebProjects darkMode={darkMode} />} />
             <Route path="/mobile-app-projects" element={<MobileProjects darkMode={darkMode} />} />
+            <Route path="/cv" element={<CV />} />
             <Route path="*" element={
               <div className="mt-[20vh] text-center flex flex-col gap-3 items-center">
                 page not available or under development <br /> 
