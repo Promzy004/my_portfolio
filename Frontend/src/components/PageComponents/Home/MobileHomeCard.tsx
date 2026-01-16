@@ -421,7 +421,7 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                     115, // max width from sm:w-[115px]
                                     115  // max height from sm:h-[115px]
                                 )} 
-                                alt="About Me" 
+                                alt="Edwin Promise - Full-Stack Web Developer About Me"  
                                 loading="lazy" 
                                 className="object-cover h-full w-full" 
                             />
@@ -460,7 +460,7 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                     "https://res.cloudinary.com/dto6lwmss/image/upload/v1768085040/a5d7b2a9b05a518d58c239b1bc39a550a664ed05_jswjv8.jpg",
                                     115, 115
                                 )} 
-                                alt="Me" 
+                                alt="Edwin Promise professional developer - Me" 
                                 loading="lazy" 
                                 className="object-cover h-full w-full" 
                             />
@@ -499,7 +499,7 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                     "https://res.cloudinary.com/dto6lwmss/image/upload/v1768085040/db8fb204d05c82e0f4e8cf801c3ee747b0630d8b_ey71ho.jpg",
                                     115, 115
                                 )} 
-                                alt="CV" 
+                                alt="Edwin Promise CV and resume - Full-Stack Developer" 
                                 loading="lazy" 
                                 className="object-cover h-full w-full" 
                             />
@@ -551,7 +551,7 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                             "https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/6901011bb2147330146c0cbac33af1f211fef8a8_hmllcr.jpg",
                                             115, 115
                                         )} 
-                                        alt="Projects" 
+                                        alt="Edwin Promise web and mobile development projects portfolio" 
                                         loading="lazy" 
                                         className="object-cover h-full w-full" 
                                     />
@@ -590,7 +590,7 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                             "https://res.cloudinary.com/dto6lwmss/image/upload/v1753563404/6901011bb2147330146c0cbac33af1f211fef8a8_hmllcr.jpg",
                                             115, 115
                                         )} 
-                                        alt="Mobile App Projects" 
+                                        alt="Edwin Promise mobile application development projects for iOS and Android" 
                                         loading="lazy" 
                                         className="object-cover h-full w-full" 
                                     />
@@ -629,7 +629,7 @@ const MobileHomeCard: React.FC<IHomeProps> = ({darkMode}) => {
                                             "https://res.cloudinary.com/dto6lwmss/image/upload/v1768085040/6ddd586032538bcb458a4eab4891ac3a37f65299_vrznz7.jpg",
                                             115, 115
                                         )} 
-                                        alt="Web Projects" 
+                                        alt="Edwin Promise web development projects - React, TypeScript, and Laravel applications" 
                                         loading="lazy" 
                                         className="object-cover h-full w-full" 
                                     />

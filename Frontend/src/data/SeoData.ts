@@ -72,8 +72,11 @@ export const seoData: SEODataMap = {
         keywords: [
             'About Edwin Promise',
             'Full-Stack Developer Bio',
+            'Full-Stack Developer',
             'Web Developer Nigeria',
             'React Developer',
+            'Go Developer',
+            'Laravel Developer',
             'Software Engineer Background'
         ],
         path: '/about',
@@ -146,32 +149,32 @@ export const seoData: SEODataMap = {
                     "@type": "ListItem",
                     "position": 1,
                     "item": {
-                    "@type": "SoftwareApplication",
-                    "name": "Project 1 Name", // Update with real project
-                    "description": "Project 1 description",
-                    "url": "https://project1-url.com",
-                    "applicationCategory": "WebApplication",
-                    "author": {
-                        "@type": "Person",
-                        "name": "Edwin Promise"
-                    },
-                    "programmingLanguage": ["React", "TypeScript", "TailwindCSS"]
+                        "@type": "SoftwareApplication",
+                        "name": "Project 1 Name", // Update with real project
+                        "description": "Project 1 description",
+                        "url": "https://project1-url.com",
+                        "applicationCategory": "WebApplication",
+                        "author": {
+                            "@type": "Person",
+                            "name": "Edwin Promise"
+                        },
+                        "programmingLanguage": ["React", "TypeScript", "TailwindCSS"]
                     }
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
-                    "item": {
-                    "@type": "SoftwareApplication",
-                    "name": "Project 2 Name",
-                    "description": "Project 2 description",
-                    "url": "https://project2-url.com",
-                    "applicationCategory": "WebApplication",
-                    "author": {
-                        "@type": "Person",
-                        "name": "Edwin Promise"
-                    },
-                    "programmingLanguage": ["React", "Laravel", "MySQL"]
+                        "item": {
+                        "@type": "SoftwareApplication",
+                        "name": "Project 2 Name",
+                        "description": "Project 2 description",
+                        "url": "https://project2-url.com",
+                        "applicationCategory": "WebApplication",
+                        "author": {
+                            "@type": "Person",
+                            "name": "Edwin Promise"
+                        },
+                        "programmingLanguage": ["React", "Laravel", "MySQL"]
                     }
                 }
                 // Add more projects here

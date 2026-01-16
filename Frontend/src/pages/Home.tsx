@@ -30,12 +30,12 @@ const Home: React.FC<HomeProps> = ({darkMode}) => {
                         <div className="flex flex-wrap sm:flex-nowrap justify-center gap-2 xxs:gap-4 sm:gap-5 items-center font-medium text-[10px] xs:text-sm sm:text-base">
                             <span className="flex gap-1 xxs:gap-2 sm:gap-3 justify-center items-center">
                                 <img src={darkMode ? email_white : email_black} alt="Email icon" className="transition-all duration-500 w-4 xxs:w-5 sm:w-6" />
-                                <p className="text-lg">promiseedwin242@gmail.com</p>
+                                <h2 className="text-lg" aria-label="Edwin Promise Email Address">promiseedwin242@gmail.com</h2>
                             </span>
                             <div className="hidden sm:block h-5 sm:h-6 w-[1px] bg-[#888888]"></div>
                             <span className="hidden sm:flex gap-1 xxs:gap-2 sm:gap-3 justify-center items-center">
                                 <img src={darkMode ? phone_white : phone_black} alt="Phone icon" className="transition-all duration-500 w-4 xxs:w-5 sm:w-6" />
-                                <p className="text-lg">+234 7058149298</p>
+                                <h2 className="text-lg" aria-label="Edwin Promise Phone Number">+234 7058149298</h2>
                             </span>
                         </div>
                         <div className="flex flex-wrap justify-center gap-2 sm:gap-3 xs:w-[80%]">

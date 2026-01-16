@@ -12,31 +12,31 @@ const socialHandles: ISocialHandles[] = [
         social: 'Mail',
         link: 'promiseedwin242@gmail.com',
         icon: Icons.Mail,
-        ariaLabel: 'Email Edwin Promise'
+        ariaLabel: 'Email Edwin Promise - Full-Stack Developer'
     },
     {
         social: 'LinkendIn',
         link: 'https://www.linkedin.com/in/edwin-promise-a73b822b6/',
         icon: Icons.LinkendIn,
-        ariaLabel: 'Visit Edwin Promise on LinkedIn'
+        ariaLabel: 'Edwin Promise LinkedIn - Full-Stack Web Developer profile'
     },
     {
         social: 'Github',
         link: 'https://github.com/Promzy004',
         icon: Icons.Github,
-        ariaLabel: 'Visit Edwin Promise on GitHub'
+        ariaLabel: 'Edwin Promise GitHub - Web development projects and code'
     },
     {
         social: 'TikTok',
         link: '',
         icon: Icons.TikTok,
-        ariaLabel: 'Visit Edwin Promise on TikTok'
+        ariaLabel: 'Edwin Promise TikTok'
     },
     {
         social: 'Twitter',
         link: 'https://x.com/promzy_004',
         icon: Icons.Twitter,
-        ariaLabel: 'Visit Edwin Promise on Twitter/X'
+        ariaLabel: 'Edwin Promise Twitter/X - Developer insights and updates'
     },
 ]
 
