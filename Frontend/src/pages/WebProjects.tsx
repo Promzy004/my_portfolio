@@ -61,7 +61,7 @@ const WebProjects = ({darkMode}: {darkMode: boolean}) => {
                                             projectDate={project.date} 
                                             projectTags={project.tags} 
                                             projectLink={project.link} 
-                                            projectDesc={project.desc} 
+                                            // projectDesc={project.desc} 
                                         />
                                     </motion.div>
                                 ))}

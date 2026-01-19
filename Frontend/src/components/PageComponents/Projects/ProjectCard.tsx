@@ -7,25 +7,25 @@ interface ProjectCardProps {
     projectImage: string,
     projectTags: string[]
     projectLink: string
-    projectDesc: string
+    projectDesc?: string
 }
 
 const ProjectCard: React.FC <ProjectCardProps> = ({darkMode, projectImage, projectName, projectDate, projectTags, projectLink, projectDesc }) => {
     return (
-        <div className="relative overflow-hidden h-full bg-white w-full rounded-[20px]">
+        <div className="relative overflow-hidden h-[420px] w-full rounded-[20px] bg-white drop-shadow-sm">
 
             {/* project image */}
-            <div className="h-[180px] sm:h-[230px] cursor-pointer overflow-hidden">
+            <div className="h-[180px] sm:h-[50%] cursor-pointer overflow-hidden bg-primary">
                 <img                     
                     src={projectImage}
                     alt={`image of ${projectName} project`}
                     loading="lazy" 
-                    className="w-full h-full object-cover transition-all duration-500 hover:scale-105" 
+                    className="w-full h-full object-cover object-top transition-all duration-500 hover:scale-105" 
                 />
             </div>
 
             {/* project details */}
-            <div className="dark:bg-[#111] flex flex-col gap-10 h-full px-6 py-8">
+            <div className="dark:bg-[#111] flex flex-col justify-between h-[50%] px-6 pt-8 pb-6">
                 <div>
                     <div className="flex gap-5 justify-between items-center">
                         <div className="flex flex-col gap-1">
