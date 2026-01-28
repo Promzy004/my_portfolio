@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from "path"
 
 export default defineConfig({
   plugins: [react()],
@@ -17,4 +18,9 @@ export default defineConfig({
   esbuild: {
     drop: ['console', 'debugger'], // Remove console and debugger statements
   },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src")
+    }
+  }
 })
