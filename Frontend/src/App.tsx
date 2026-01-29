@@ -3,6 +3,8 @@ import RouteChangeProgress from "./ProgressBar"
 import { lazy, Suspense, useEffect, useState } from "react"
 import Navigation from "./components/GlobalComponents/Navigation/Navigation"
 import ThemeToggleBtn from "./components/GlobalComponents/ThemeToggler/ThemeToggleBtn"
+import Blog from "@/pages/Blog"
+import BlogDetails from "./pages/BlogDetails"
 
 // Lazy load all pages (except critical ones if needed)
 const Home = lazy(() => import("./pages/Home"))
@@ -57,6 +59,8 @@ function App () {
             <Route path="/web-projects" element={<WebProjects darkMode={darkMode} />} />
             <Route path="/mobile-app-projects" element={<MobileProjects darkMode={darkMode} />} />
             <Route path="/cv" element={<CV />} />
+            <Route path="/blog" element={<Blog darkMode={darkMode} />} />
+            <Route path="/blog/:slug" element={<BlogDetails darkMode={darkMode} />} />
             <Route path="*" element={
               <div className="mt-[20vh] text-center flex flex-col gap-3 items-center">
                 page not available or under development <br /> 
