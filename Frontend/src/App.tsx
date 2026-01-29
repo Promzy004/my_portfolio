@@ -5,6 +5,7 @@ import Navigation from "./components/GlobalComponents/Navigation/Navigation"
 import ThemeToggleBtn from "./components/GlobalComponents/ThemeToggler/ThemeToggleBtn"
 import Blog from "@/pages/Blog"
 import BlogDetails from "./pages/BlogDetails"
+import Admin from "./pages/Admin"
 
 // Lazy load all pages (except critical ones if needed)
 const Home = lazy(() => import("./pages/Home"))
@@ -42,9 +43,9 @@ function App () {
 
   return (
     <div className="relative font-mullish flex flex-col items-center gap-10 xs:gap-12 bg-[#F8F2F2] text-[#090909] dark:bg-[#090909] dark:text-[#FAFAFA] min-h-screen">
-      <Navigation darkMode={darkMode} />
+      {/* <Navigation darkMode={darkMode} /> */}
       <RouteChangeProgress />
-      <ThemeToggleBtn darkMode={darkMode} setDarkMode={setDarkMode} />
+      {/* <ThemeToggleBtn darkMode={darkMode} setDarkMode={setDarkMode} /> */}
 
       <main className="w-full flex-1">
         <Suspense fallback={
@@ -61,6 +62,7 @@ function App () {
             <Route path="/cv" element={<CV />} />
             <Route path="/blog" element={<Blog darkMode={darkMode} />} />
             <Route path="/blog/:slug" element={<BlogDetails darkMode={darkMode} />} />
+            <Route path="/admin/*" element={<Admin darkMode={darkMode} />} />
             <Route path="*" element={
               <div className="mt-[20vh] text-center flex flex-col gap-3 items-center">
                 page not available or under development <br /> 
