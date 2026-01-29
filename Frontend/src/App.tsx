@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import RouteChangeProgress from "./ProgressBar"
 import { lazy, Suspense, useEffect, useState } from "react"
-import Navigation from "./components/GlobalComponents/Navigation/Navigation"
 import ThemeToggleBtn from "./components/GlobalComponents/ThemeToggler/ThemeToggleBtn"
 import Blog from "@/pages/Blog"
 import BlogDetails from "./pages/BlogDetails"
