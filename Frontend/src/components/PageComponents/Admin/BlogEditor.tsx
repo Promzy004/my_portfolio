@@ -83,14 +83,14 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
   return (
     <div className="max-w-4xl mx-auto">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold">
           {post ? "Edit Blog Post" : "Create New Blog Post"}
         </h1>
-        <div className="flex gap-3">
+        <div className="flex gap-2 sm:gap-3">
           <button
             onClick={onCancel}
-            className={`px-6 py-2 rounded-lg font-medium transition-all ${
+            className={`flex-1 sm:flex-none px-4 sm:px-6 py-2 rounded-lg font-medium transition-all text-sm sm:text-base ${
               darkMode
                 ? "bg-[#2A2A2A] text-[#CCCCCC] hover:bg-[#333333]"
                 : "bg-[#E5E5E5] text-[#666666] hover:bg-[#DDDDDD]"
@@ -100,7 +100,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
           </button>
           <button
             onClick={handleSave}
-            className="px-6 py-2 rounded-lg font-medium text-white transition-all hover:opacity-90"
+            className="flex-1 sm:flex-none px-4 sm:px-6 py-2 rounded-lg font-medium text-white transition-all hover:opacity-90 text-sm sm:text-base"
             style={{ backgroundColor: "#2B93E2" }}
           >
             Save Post
@@ -110,11 +110,11 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
 
       {/* Basic Info Form */}
       <div
-        className={`p-6 rounded-xl mb-6 ${
+        className={`p-4 sm:p-6 rounded-xl mb-4 sm:mb-6 ${
           darkMode ? "bg-[#1A1A1A]" : "bg-white"
         }`}
       >
-        <h2 className="text-xl font-bold mb-4">Post Information</h2>
+        <h2 className="text-lg sm:text-xl font-bold mb-4">Post Information</h2>
         
         <div className="space-y-4">
           <div>
@@ -125,7 +125,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className={`w-full px-4 py-2 rounded-lg border ${
+              className={`w-full px-4 py-2 rounded-lg border text-sm sm:text-base ${
                 darkMode
                   ? "bg-[#2A2A2A] border-[#333333] text-white"
                   : "bg-white border-[#E5E5E5] text-black"
@@ -142,7 +142,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
               value={excerpt}
               onChange={(e) => setExcerpt(e.target.value)}
               rows={3}
-              className={`w-full px-4 py-2 rounded-lg border ${
+              className={`w-full px-4 py-2 rounded-lg border text-sm sm:text-base ${
                 darkMode
                   ? "bg-[#2A2A2A] border-[#333333] text-white"
                   : "bg-white border-[#E5E5E5] text-black"
@@ -151,7 +151,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className={`block text-sm font-medium mb-2 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
                 Slug *
@@ -160,7 +160,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
                 type="text"
                 value={slug}
                 onChange={(e) => setSlug(e.target.value.toLowerCase().replace(/\s+/g, '-'))}
-                className={`w-full px-4 py-2 rounded-lg border ${
+                className={`w-full px-4 py-2 rounded-lg border text-sm sm:text-base ${
                   darkMode
                     ? "bg-[#2A2A2A] border-[#333333] text-white"
                     : "bg-white border-[#E5E5E5] text-black"
@@ -190,17 +190,17 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
 
       {/* Content Blocks */}
       <div
-        className={`p-6 rounded-xl mb-6 ${
+        className={`p-4 sm:p-6 rounded-xl mb-4 sm:mb-6 ${
           darkMode ? "bg-[#1A1A1A]" : "bg-white"
         }`}
       >
-        <h2 className="text-xl font-bold mb-4">Content Blocks</h2>
+        <h2 className="text-lg sm:text-xl font-bold mb-4">Content Blocks</h2>
 
         {/* Add Block Buttons */}
-        <div className="flex flex-wrap gap-2 mb-6">
+        <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
           <button
             onClick={() => addBlock("paragraph")}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all ${
               darkMode
                 ? "bg-[#2A2A2A] text-[#CCCCCC] hover:bg-[#333333]"
                 : "bg-[#E5E5E5] text-[#666666] hover:bg-[#DDDDDD]"
@@ -210,7 +210,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
           </button>
           <button
             onClick={() => addBlock("heading")}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all ${
               darkMode
                 ? "bg-[#2A2A2A] text-[#CCCCCC] hover:bg-[#333333]"
                 : "bg-[#E5E5E5] text-[#666666] hover:bg-[#DDDDDD]"
@@ -220,7 +220,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
           </button>
           <button
             onClick={() => addBlock("list")}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all ${
               darkMode
                 ? "bg-[#2A2A2A] text-[#CCCCCC] hover:bg-[#333333]"
                 : "bg-[#E5E5E5] text-[#666666] hover:bg-[#DDDDDD]"
@@ -230,7 +230,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
           </button>
           <button
             onClick={() => addBlock("code")}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all ${
               darkMode
                 ? "bg-[#2A2A2A] text-[#CCCCCC] hover:bg-[#333333]"
                 : "bg-[#E5E5E5] text-[#666666] hover:bg-[#DDDDDD]"
@@ -240,7 +240,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
           </button>
           <button
             onClick={() => addBlock("callout")}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all ${
               darkMode
                 ? "bg-[#2A2A2A] text-[#CCCCCC] hover:bg-[#333333]"
                 : "bg-[#E5E5E5] text-[#666666] hover:bg-[#DDDDDD]"
