@@ -48,8 +48,8 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ darkMode, onLogout, isOpen,
       {/* Sidebar */}
       <aside
         className={`
-          fixed lg:static inset-y-0 left-0 z-50
-          w-64 min-h-screen border-r
+          fixed inset-y-0 left-0 z-50
+          w-64 h-screen top-0 border-r
           transform transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
           ${darkMode ? "bg-[#1A1A1A] border-[#333333]" : "bg-white border-[#E5E5E5]"}
