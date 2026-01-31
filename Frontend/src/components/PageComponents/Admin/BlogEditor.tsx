@@ -49,7 +49,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
       const response = await fetch('http://localhost:8080/api/upload/image', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8xNzY5ODE3Nzk4OTE2ODEyMDAwX1BEckREYjRHazlNIiwiZW1haWwiOiJwcm9taXNlZWR3aW4yNDJAZ21haWwuY29tIiwic3ViIjoidXNlcl8xNzY5ODE3Nzk4OTE2ODEyMDAwX1BEckREYjRHazlNIiwiZXhwIjoxNzY5OTAwMDc3LCJuYmYiOjE3Njk4OTgyNzcsImlhdCI6MTc2OTg5ODI3N30.kwEdfoxvu1AfwjsNaKCNUlesriyqFk07T1a4PI3jREQ`
+          'Authorization': `Bearer ${"accesstoken"}` // Get from your auth context
         },
         body: formData
       });

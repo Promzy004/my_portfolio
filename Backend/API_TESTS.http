@@ -6,8 +6,8 @@
 ### CONFIGURATION
 ### ==========================================
 @baseUrl = http://localhost:8080
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8xNzY5ODE3Nzk4OTE2ODEyMDAwX1BEckREYjRHazlNIiwiZW1haWwiOiJwcm9taXNlZWR3aW4yNDJAZ21haWwuY29tIiwic3ViIjoidXNlcl8xNzY5ODE3Nzk4OTE2ODEyMDAwX1BEckREYjRHazlNIiwiZXhwIjoxNzY5ODc0NTMxLCJuYmYiOjE3Njk4NzI3MzEsImlhdCI6MTc2OTg3MjczMX0.kn0qTzVgZoYlG6vdhJAswnn9QzF6_AyIpp_8OV-w7Pw
-@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8xNzY5ODE3Nzk4OTE2ODEyMDAwX1BEckREYjRHazlNIiwiZW1haWwiOiJwcm9taXNlZWR3aW4yNDJAZ21haWwuY29tIiwic3ViIjoidXNlcl8xNzY5ODE3Nzk4OTE2ODEyMDAwX1BEckREYjRHazlNIiwiZXhwIjoxNzcyNDA5ODM2LCJuYmYiOjE3Njk4MTc4MzYsImlhdCI6MTc2OTgxNzgzNn0.0_x6AoUMryy2JlalrpQJ8hFQNqQiH0Gjm79wnXoxMFM
+@accessToken = token here
+@refreshToken = token here
 
 ### ==========================================
 ### 1. HEALTH CHECK
