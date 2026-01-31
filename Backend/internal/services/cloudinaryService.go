@@ -1,6 +1,7 @@
 package services
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"io"
@@ -9,10 +10,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/cloudinary/cloudinary-go/v2"
-	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 	"github.com/Promzy004/my_portfolio/config"
 	"github.com/Promzy004/my_portfolio/internal/models"
+	"github.com/cloudinary/cloudinary-go/v2"
+	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 )
 
 // CloudinaryService handles image upload to Cloudinary
@@ -77,15 +78,16 @@ func (s *CloudinaryService) UploadImage(file multipart.File, header *multipart.F
 		Folder:       s.folder,
 		PublicID:     filename,
 		ResourceType: "image",
-		Format:       "auto",
-		Transformation: "q_auto:eco,f_auto", // Automatic quality optimization
-		Eager: "q_auto:eco,f_auto,w_2000,c_limit", // Eager transformation for optimization
+		Transformation: "q_auto:eco,f_auto",
 	}
+	
 
 	// Upload to Cloudinary
 	ctx := context.Background()
-	result, err := s.cld.Upload.Upload(ctx, fileBytes, uploadParams)
+	reader := bytes.NewReader(fileBytes)
+	result, err := s.cld.Upload.Upload(ctx, reader, uploadParams)
 	if err != nil {
+		fmt.Println("Error 1:",err)
 		return nil, fmt.Errorf("%w: %v", models.ErrUploadFailed, err)
 	}
 

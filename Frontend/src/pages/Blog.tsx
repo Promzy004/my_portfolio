@@ -2,19 +2,20 @@ import React from "react"
 import BlogCard from "@/components/PageComponents/Blog/BlogCard"
 import { blogData } from "@/data/BlogData"
 import Footer from "../components/PageComponents/Home/Footer"
-// import SEO from "@/components/SEO/SEO"
+import { generateBlogListSEO } from "@/utils/generateBlogSEO"
+import SEO from "@/components/SEO/SEO"
 
 interface BlogPageProps {
   darkMode: boolean
 }
 
 const Blog: React.FC<BlogPageProps> = ({ darkMode }) => {
+
+  const seoData = generateBlogListSEO();
+
   return (
     <>
-      {/* <SEO
-        title="Blog | Edwin Promise"
-        description="Thoughts and lessons from building real software as a developer."
-      /> */}
+      <SEO {...seoData} />
 
       <div className="layout flex flex-col gap-16">
         {/* Header */}

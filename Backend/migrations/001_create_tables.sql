@@ -31,11 +31,16 @@ CREATE TABLE IF NOT EXISTS blogs (
     excerpt TEXT NOT NULL,
     date DATE NOT NULL,
     slug VARCHAR(500) UNIQUE NOT NULL,
+    meta_title VARCHAR(500),
+    meta_description TEXT,
+    meta_image VARCHAR(1000),
+    meta_keywords JSON,
     blocks JSON,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     INDEX idx_slug (slug),
-    INDEX idx_date (date)
+    INDEX idx_date (date),
+    INDEX idx_meta_keywords (meta_keywords)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Projects table for portfolio projects

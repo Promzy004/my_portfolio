@@ -15,6 +15,59 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
   const [slug, setSlug] = useState(post?.slug || "")
   const [blocks, setBlocks] = useState<BlogBlock[]>(post?.blocks || [])
 
+  const [showMetadata, setShowMetadata] = useState(false);
+  const [metaTitle, setMetaTitle] = useState(post?.meta_title || "");
+  const [metaDescription, setMetaDescription] = useState(post?.meta_description || "");
+  const [metaImage, setMetaImage] = useState(post?.meta_image || "");
+  const [metaKeywords, setMetaKeywords] = useState<string[]>(post?.meta_keywords || []);
+  const [keywordInput, setKeywordInput] = useState("");
+  const [uploadingMetaImage, setUploadingMetaImage] = useState(false);
+
+
+  const handleAddKeyword = () => {
+    const trimmed = keywordInput.trim();
+    if (trimmed && !metaKeywords.includes(trimmed)) {
+      setMetaKeywords([...metaKeywords, trimmed]);
+      setKeywordInput("");
+    }
+  };
+  
+  const handleRemoveKeyword = (index: number) => {
+    setMetaKeywords(metaKeywords.filter((_, i) => i !== index));
+  };
+  
+  const handleMetaImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+  
+    setUploadingMetaImage(true);
+  
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    try {
+      const response = await fetch('http://localhost:8080/api/upload/image', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8xNzY5ODE3Nzk4OTE2ODEyMDAwX1BEckREYjRHazlNIiwiZW1haWwiOiJwcm9taXNlZWR3aW4yNDJAZ21haWwuY29tIiwic3ViIjoidXNlcl8xNzY5ODE3Nzk4OTE2ODEyMDAwX1BEckREYjRHazlNIiwiZXhwIjoxNzY5OTAwMDc3LCJuYmYiOjE3Njk4OTgyNzcsImlhdCI6MTc2OTg5ODI3N30.kwEdfoxvu1AfwjsNaKCNUlesriyqFk07T1a4PI3jREQ`
+        },
+        body: formData
+      });
+  
+      const result = await response.json();
+  
+      if (result.success) {
+        setMetaImage(result.data.url);
+      } else {
+        alert('Upload failed: ' + result.message);
+      }
+    } catch (error) {
+      alert('Upload error');
+    } finally {
+      setUploadingMetaImage(false);
+    }
+  };
+
   const addBlock = (type: BlogBlock["type"]) => {
     const newBlock: BlogBlock = {
       id: `b${Date.now()}`,
@@ -64,10 +117,10 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
 
   const handleSave = () => {
     if (!title || !excerpt || !slug) {
-      alert("Please fill in all required fields")
-      return
+      alert("Please fill in all required fields");
+      return;
     }
-
+  
     const blogPost: BlogPost = {
       id: post?.id || String(Date.now()),
       title,
@@ -75,10 +128,15 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
       date,
       slug,
       blocks,
-    }
-
-    onSave(blogPost)
-  }
+      // Add metadata fields
+      meta_title: metaTitle || undefined,
+      meta_description: metaDescription || undefined,
+      meta_image: metaImage || undefined,
+      meta_keywords: metaKeywords.length > 0 ? metaKeywords : undefined,
+    };
+  
+    onSave(blogPost);
+  };
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -186,6 +244,204 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ darkMode, post, onSave, onCance
             </div>
           </div>
         </div>
+      </div>
+
+      {/* SEO Metadata Form (Optional) */}
+      <div
+        className={`p-4 sm:p-6 rounded-xl mb-4 sm:mb-6 ${
+          darkMode ? "bg-[#1A1A1A]" : "bg-white"
+        }`}
+      >
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg sm:text-xl font-bold">SEO Metadata (Optional)</h2>
+          <button
+            type="button"
+            onClick={() => setShowMetadata(!showMetadata)}
+            className={`text-sm px-3 py-1 rounded ${
+              darkMode
+                ? "bg-[#2A2A2A] text-[#CCCCCC] hover:bg-[#333333]"
+                : "bg-[#E5E5E5] text-[#666666] hover:bg-[#DDDDDD]"
+            }`}
+          >
+            {showMetadata ? "Hide" : "Show"} Metadata
+          </button>
+        </div>
+
+        {showMetadata && (
+          <div className="space-y-4">
+            <p className={`text-sm ${darkMode ? "text-[#888888]" : "text-[#666666]"}`}>
+              Leave fields empty to auto-generate from blog content
+            </p>
+
+            {/* Meta Title */}
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
+                Meta Title
+              </label>
+              <input
+                type="text"
+                value={metaTitle}
+                onChange={(e) => setMetaTitle(e.target.value)}
+                className={`w-full px-4 py-2 rounded-lg border text-sm sm:text-base ${
+                  darkMode
+                    ? "bg-[#2A2A2A] border-[#333333] text-white"
+                    : "bg-white border-[#E5E5E5] text-black"
+                } outline-none focus:border-[#2B93E2]`}
+                placeholder={`Auto: ${title || "Your blog title"}`}
+                maxLength={255}
+              />
+              <p className={`text-xs mt-1 ${darkMode ? "text-[#666666]" : "text-[#999999]"}`}>
+                {metaTitle.length}/255 characters
+              </p>
+            </div>
+
+            {/* Meta Description */}
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
+                Meta Description
+              </label>
+              <textarea
+                value={metaDescription}
+                onChange={(e) => setMetaDescription(e.target.value)}
+                rows={3}
+                className={`w-full px-4 py-2 rounded-lg border text-sm sm:text-base ${
+                  darkMode
+                    ? "bg-[#2A2A2A] border-[#333333] text-white"
+                    : "bg-white border-[#E5E5E5] text-black"
+                } outline-none focus:border-[#2B93E2]`}
+                placeholder={`Auto: ${excerpt || "Blog excerpt will be used"}`}
+                maxLength={1000}
+              />
+              <p className={`text-xs mt-1 ${darkMode ? "text-[#666666]" : "text-[#999999]"}`}>
+                {metaDescription.length}/1000 characters
+              </p>
+            </div>
+
+            {/* Meta Image */}
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
+                Meta Image (Open Graph / Twitter Card)
+              </label>
+              
+              {metaImage ? (
+                <div className="space-y-2">
+                  <img 
+                    src={metaImage} 
+                    alt="Meta preview" 
+                    className="w-full max-w-md h-48 object-cover rounded-lg"
+                  />
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setMetaImage("")}
+                      className="text-sm px-3 py-2 rounded bg-red-500 text-white hover:bg-red-600"
+                    >
+                      Remove Image
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => document.getElementById('metaImageInput')?.click()}
+                      className={`text-sm px-3 py-2 rounded ${
+                        darkMode
+                          ? "bg-[#2A2A2A] text-[#CCCCCC] hover:bg-[#333333]"
+                          : "bg-[#E5E5E5] text-[#666666] hover:bg-[#DDDDDD]"
+                      }`}
+                    >
+                      Change Image
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => document.getElementById('metaImageInput')?.click()}
+                  className={`w-full px-4 py-8 rounded-lg border-2 border-dashed text-sm transition-colors ${
+                    darkMode
+                      ? "border-[#333333] hover:border-[#2B93E2] text-[#CCCCCC]"
+                      : "border-[#E5E5E5] hover:border-[#2B93E2] text-[#666666]"
+                  }`}
+                >
+                  Click to upload meta image (recommended: 1200x630px)
+                </button>
+              )}
+
+              <input
+                id="metaImageInput"
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleMetaImageUpload}
+              />
+              
+              <p className={`text-xs mt-1 ${darkMode ? "text-[#666666]" : "text-[#999999]"}`}>
+                If not provided, first image from blog content will be used
+              </p>
+            </div>
+
+            {/* Meta Keywords */}
+            <div>
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? "text-[#CCCCCC]" : "text-[#333333]"}`}>
+                Meta Keywords
+              </label>
+              <div className="space-y-2">
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={keywordInput}
+                    onChange={(e) => setKeywordInput(e.target.value)}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleAddKeyword();
+                      }
+                    }}
+                    className={`flex-1 px-4 py-2 rounded-lg border text-sm sm:text-base ${
+                      darkMode
+                        ? "bg-[#2A2A2A] border-[#333333] text-white"
+                        : "bg-white border-[#E5E5E5] text-black"
+                    } outline-none focus:border-[#2B93E2]`}
+                    placeholder="Add keyword (press Enter)"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAddKeyword}
+                    className="px-4 py-2 rounded-lg font-medium text-white"
+                    style={{ backgroundColor: "#2B93E2" }}
+                  >
+                    Add
+                  </button>
+                </div>
+
+                {/* Keywords Display */}
+                <div className="flex flex-wrap gap-2">
+                  {metaKeywords.map((keyword, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm"
+                      style={{ backgroundColor: "#2B93E2", color: "white" }}
+                    >
+                      {keyword}
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveKeyword(index)}
+                        className="hover:opacity-75"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </div>
+
+                <p className={`text-xs ${darkMode ? "text-[#666666]" : "text-[#999999]"}`}>
+                  {metaKeywords.length === 0 
+                    ? "Keywords will be auto-generated from blog content"
+                    : `${metaKeywords.length} keyword(s) added`
+                  }
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Content Blocks */}

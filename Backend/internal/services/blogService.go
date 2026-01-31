@@ -88,16 +88,30 @@ func (s *BlogService) Create(req *models.BlogCreateRequest) (*models.Blog, error
 		return nil, fmt.Errorf("failed to marshal blocks: %w", err)
 	}
 
+	// Convert keywords to JSON if present
+	var metaKeywordsJSON json.RawMessage
+	if len(req.MetaKeywords) > 0 {
+		keywordsBytes, err := json.Marshal(req.MetaKeywords)
+		if err != nil {
+			return nil, fmt.Errorf("failed to marshal meta keywords: %w", err)
+		}
+		metaKeywordsJSON = keywordsBytes
+	}
+
 	// Create blog
 	blog := &models.Blog{
-		ID:        utils.GenerateID("blog"),
-		Title:     req.Title,
-		Excerpt:   req.Excerpt,
-		Date:      req.Date,
-		Slug:      req.Slug,
-		Blocks:    blocksJSON,
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
+		ID:              utils.GenerateID("blog"),
+		Title:           req.Title,
+		Excerpt:         req.Excerpt,
+		Date:            req.Date,
+		Slug:            req.Slug,
+		MetaTitle:       req.MetaTitle,
+		MetaDescription: req.MetaDescription,
+		MetaImage:       req.MetaImage,
+		MetaKeywords:    metaKeywordsJSON,
+		Blocks:          blocksJSON,
+		CreatedAt:       time.Now(),
+		UpdatedAt:       time.Now(),
 	}
 
 	if err := s.repo.Create(blog); err != nil {
@@ -147,15 +161,29 @@ func (s *BlogService) Update(id string, req *models.BlogUpdateRequest) (*models.
 		return nil, fmt.Errorf("failed to marshal blocks: %w", err)
 	}
 
+	// Convert keywords to JSON if present
+	var metaKeywordsJSON json.RawMessage
+	if len(req.MetaKeywords) > 0 {
+		keywordsBytes, err := json.Marshal(req.MetaKeywords)
+		if err != nil {
+			return nil, fmt.Errorf("failed to marshal meta keywords: %w", err)
+		}
+		metaKeywordsJSON = keywordsBytes
+	}
+
 	// Update blog
 	blog := &models.Blog{
-		ID:        id,
-		Title:     req.Title,
-		Excerpt:   req.Excerpt,
-		Date:      req.Date,
-		Slug:      req.Slug,
-		Blocks:    blocksJSON,
-		UpdatedAt: time.Now(),
+		ID:              id,
+		Title:           req.Title,
+		Excerpt:         req.Excerpt,
+		Date:            req.Date,
+		Slug:            req.Slug,
+		MetaTitle:       req.MetaTitle,
+		MetaDescription: req.MetaDescription,
+		MetaImage:       req.MetaImage,
+		MetaKeywords:    metaKeywordsJSON,
+		Blocks:          blocksJSON,
+		UpdatedAt:       time.Now(),
 	}
 
 	if err := s.repo.Update(blog); err != nil {

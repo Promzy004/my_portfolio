@@ -33,7 +33,7 @@ func (r *BlogRepository) GetAll(page, perPage int) ([]models.Blog, int, error) {
 
 	// Get paginated results
 	query := `
-		SELECT id, title, excerpt, date, slug, blocks, created_at, updated_at
+		SELECT id, title, excerpt, date, slug, meta_title, meta_description, meta_image, meta_keywords, blocks, created_at, updated_at
 		FROM blogs
 		ORDER BY date DESC, created_at DESC
 		LIMIT ? OFFSET ?
@@ -48,12 +48,19 @@ func (r *BlogRepository) GetAll(page, perPage int) ([]models.Blog, int, error) {
 	var blogs []models.Blog
 	for rows.Next() {
 		var blog models.Blog
+		var metaTitle, metaDescription, metaImage sql.NullString
+		var metaKeywords []byte
+		
 		err := rows.Scan(
 			&blog.ID,
 			&blog.Title,
 			&blog.Excerpt,
 			&blog.Date,
 			&blog.Slug,
+			&metaTitle,
+			&metaDescription,
+			&metaImage,
+			&metaKeywords,
 			&blog.Blocks,
 			&blog.CreatedAt,
 			&blog.UpdatedAt,
@@ -61,6 +68,21 @@ func (r *BlogRepository) GetAll(page, perPage int) ([]models.Blog, int, error) {
 		if err != nil {
 			return nil, 0, fmt.Errorf("failed to scan blog: %w", err)
 		}
+		
+		// Handle nullable metadata fields
+		if metaTitle.Valid {
+			blog.MetaTitle = metaTitle.String
+		}
+		if metaDescription.Valid {
+			blog.MetaDescription = metaDescription.String
+		}
+		if metaImage.Valid {
+			blog.MetaImage = metaImage.String
+		}
+		if len(metaKeywords) > 0 {
+			blog.MetaKeywords = metaKeywords
+		}
+		
 		blogs = append(blogs, blog)
 	}
 
@@ -70,18 +92,25 @@ func (r *BlogRepository) GetAll(page, perPage int) ([]models.Blog, int, error) {
 // GetByID retrieves a single blog by ID
 func (r *BlogRepository) GetByID(id string) (*models.Blog, error) {
 	query := `
-		SELECT id, title, excerpt, date, slug, blocks, created_at, updated_at
+		SELECT id, title, excerpt, date, slug, meta_title, meta_description, meta_image, meta_keywords, blocks, created_at, updated_at
 		FROM blogs
 		WHERE id = ?
 	`
 
 	blog := &models.Blog{}
+	var metaTitle, metaDescription, metaImage sql.NullString
+	var metaKeywords []byte
+	
 	err := r.db.QueryRow(query, id).Scan(
 		&blog.ID,
 		&blog.Title,
 		&blog.Excerpt,
 		&blog.Date,
 		&blog.Slug,
+		&metaTitle,
+		&metaDescription,
+		&metaImage,
+		&metaKeywords,
 		&blog.Blocks,
 		&blog.CreatedAt,
 		&blog.UpdatedAt,
@@ -94,24 +123,45 @@ func (r *BlogRepository) GetByID(id string) (*models.Blog, error) {
 		return nil, fmt.Errorf("failed to get blog: %w", err)
 	}
 
+	// Handle nullable metadata fields
+	if metaTitle.Valid {
+		blog.MetaTitle = metaTitle.String
+	}
+	if metaDescription.Valid {
+		blog.MetaDescription = metaDescription.String
+	}
+	if metaImage.Valid {
+		blog.MetaImage = metaImage.String
+	}
+	if len(metaKeywords) > 0 {
+		blog.MetaKeywords = metaKeywords
+	}
+
 	return blog, nil
 }
 
 // GetBySlug retrieves a single blog by slug
 func (r *BlogRepository) GetBySlug(slug string) (*models.Blog, error) {
 	query := `
-		SELECT id, title, excerpt, date, slug, blocks, created_at, updated_at
+		SELECT id, title, excerpt, date, slug, meta_title, meta_description, meta_image, meta_keywords, blocks, created_at, updated_at
 		FROM blogs
 		WHERE slug = ?
 	`
 
 	blog := &models.Blog{}
+	var metaTitle, metaDescription, metaImage sql.NullString
+	var metaKeywords []byte
+	
 	err := r.db.QueryRow(query, slug).Scan(
 		&blog.ID,
 		&blog.Title,
 		&blog.Excerpt,
 		&blog.Date,
 		&blog.Slug,
+		&metaTitle,
+		&metaDescription,
+		&metaImage,
+		&metaKeywords,
 		&blog.Blocks,
 		&blog.CreatedAt,
 		&blog.UpdatedAt,
@@ -122,6 +172,20 @@ func (r *BlogRepository) GetBySlug(slug string) (*models.Blog, error) {
 	}
 	if err != nil {
 		return nil, fmt.Errorf("failed to get blog by slug: %w", err)
+	}
+
+	// Handle nullable metadata fields
+	if metaTitle.Valid {
+		blog.MetaTitle = metaTitle.String
+	}
+	if metaDescription.Valid {
+		blog.MetaDescription = metaDescription.String
+	}
+	if metaImage.Valid {
+		blog.MetaImage = metaImage.String
+	}
+	if len(metaKeywords) > 0 {
+		blog.MetaKeywords = metaKeywords
 	}
 
 	return blog, nil
@@ -135,9 +199,18 @@ func (r *BlogRepository) Create(blog *models.Blog) error {
 		return fmt.Errorf("failed to marshal blocks: %w", err)
 	}
 
+	// Convert keywords to JSON if present
+	var metaKeywordsJSON []byte
+	if len(blog.MetaKeywords) > 0 {
+		metaKeywordsJSON, err = json.Marshal(blog.MetaKeywords)
+		if err != nil {
+			return fmt.Errorf("failed to marshal meta keywords: %w", err)
+		}
+	}
+
 	query := `
-		INSERT INTO blogs (id, title, excerpt, date, slug, blocks, created_at, updated_at)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+		INSERT INTO blogs (id, title, excerpt, date, slug, meta_title, meta_description, meta_image, meta_keywords, blocks, created_at, updated_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 	`
 
 	_, err = r.db.Exec(query,
@@ -146,6 +219,10 @@ func (r *BlogRepository) Create(blog *models.Blog) error {
 		blog.Excerpt,
 		blog.Date,
 		blog.Slug,
+		sql.NullString{String: blog.MetaTitle, Valid: blog.MetaTitle != ""},
+		sql.NullString{String: blog.MetaDescription, Valid: blog.MetaDescription != ""},
+		sql.NullString{String: blog.MetaImage, Valid: blog.MetaImage != ""},
+		metaKeywordsJSON,
 		blocksJSON,
 		blog.CreatedAt,
 		blog.UpdatedAt,
@@ -166,9 +243,18 @@ func (r *BlogRepository) Update(blog *models.Blog) error {
 		return fmt.Errorf("failed to marshal blocks: %w", err)
 	}
 
+	// Convert keywords to JSON if present
+	var metaKeywordsJSON []byte
+	if len(blog.MetaKeywords) > 0 {
+		metaKeywordsJSON, err = json.Marshal(blog.MetaKeywords)
+		if err != nil {
+			return fmt.Errorf("failed to marshal meta keywords: %w", err)
+		}
+	}
+
 	query := `
 		UPDATE blogs
-		SET title = ?, excerpt = ?, date = ?, slug = ?, blocks = ?, updated_at = ?
+		SET title = ?, excerpt = ?, date = ?, slug = ?, meta_title = ?, meta_description = ?, meta_image = ?, meta_keywords = ?, blocks = ?, updated_at = ?
 		WHERE id = ?
 	`
 
@@ -177,6 +263,10 @@ func (r *BlogRepository) Update(blog *models.Blog) error {
 		blog.Excerpt,
 		blog.Date,
 		blog.Slug,
+		sql.NullString{String: blog.MetaTitle, Valid: blog.MetaTitle != ""},
+		sql.NullString{String: blog.MetaDescription, Valid: blog.MetaDescription != ""},
+		sql.NullString{String: blog.MetaImage, Valid: blog.MetaImage != ""},
+		metaKeywordsJSON,
 		blocksJSON,
 		time.Now(),
 		blog.ID,

@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom"
 import Footer from "@/components/PageComponents/Home/Footer"
 import BlogDetail from "@/components/PageComponents/Blog/BlogDetail"
 import { blogData } from "@/data/BlogData"
+import SEO from "@/components/SEO/SEO"
+import { generateBlogSEO } from "@/utils/generateBlogSEO"
 
 interface BlogDetailsProps {
   darkMode: boolean
@@ -21,12 +23,11 @@ const BlogDetails: React.FC<BlogDetailsProps> = ({ darkMode }) => {
     )
   }
 
+  const seoData = generateBlogSEO(post);
+
   return (
     <>
-      {/* <SEO
-        title={`${post.title} | Edwin Promise`}
-        description={post.excerpt}
-      /> */}
+      <SEO {...seoData} />
 
       <div className="layout flex flex-col gap-12">
         <BlogDetail post={post} darkMode={darkMode} />

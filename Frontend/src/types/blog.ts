@@ -12,11 +12,21 @@ export interface BlogBlock {
   }
 }
 
+// types/blog.ts
 export interface BlogPost {
-  id: string
-  title: string
-  excerpt: string
-  date: string
-  slug: string
-  blocks?: BlogBlock[]
+  id: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  slug: string;
+  blocks: BlogBlock[];
+  
+  // SEO Metadata (optional)
+  meta_title?: string;
+  meta_description?: string;
+  meta_image?: string;
+  meta_keywords?: string[];
+  
+  created_at?: string;
+  updated_at?: string;
 }
