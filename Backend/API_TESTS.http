@@ -1,0 +1,376 @@
+### Portfolio API Testing Guide
+### Use this file with VS Code REST Client extension
+### Install: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+### ==========================================
+### CONFIGURATION
+### ==========================================
+@baseUrl = http://localhost:8080
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8xNzY5ODE3Nzk4OTE2ODEyMDAwX1BEckREYjRHazlNIiwiZW1haWwiOiJwcm9taXNlZWR3aW4yNDJAZ21haWwuY29tIiwic3ViIjoidXNlcl8xNzY5ODE3Nzk4OTE2ODEyMDAwX1BEckREYjRHazlNIiwiZXhwIjoxNzY5ODE5NzM2LCJuYmYiOjE3Njk4MTc5MzYsImlhdCI6MTc2OTgxNzkzNn0.sk8uN0TomDKG5gZhl-2xFoBB5f3HLtBmu6MdsRgeGyI
+@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8xNzY5ODE3Nzk4OTE2ODEyMDAwX1BEckREYjRHazlNIiwiZW1haWwiOiJwcm9taXNlZWR3aW4yNDJAZ21haWwuY29tIiwic3ViIjoidXNlcl8xNzY5ODE3Nzk4OTE2ODEyMDAwX1BEckREYjRHazlNIiwiZXhwIjoxNzcyNDA5ODM2LCJuYmYiOjE3Njk4MTc4MzYsImlhdCI6MTc2OTgxNzgzNn0.0_x6AoUMryy2JlalrpQJ8hFQNqQiH0Gjm79wnXoxMFM
+
+### ==========================================
+### 1. HEALTH CHECK
+### ==========================================
+
+### Test if server is running
+GET {{baseUrl}}/health
+
+### ==========================================
+### 2. AUTHENTICATION
+### ==========================================
+
+### 2.1 Setup Admin (Run ONLY ONCE to create initial admin)
+POST {{baseUrl}}/api/auth/setup
+Content-Type: application/json
+
+{
+  "email": "promiseedwin242@gmail.com",
+  "password": "Pro1234,",
+  "name": "Promise"
+}
+
+### 2.2 Login (IMPORTANT: Copy tokens from response and update variables above)
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "promiseedwin242@gmail.com",
+  "password": "Pro1234,"
+}
+
+### 2.3 Refresh Access Token
+POST {{baseUrl}}/api/auth/refresh
+Content-Type: application/json
+
+{
+  "refresh_token": "{{refreshToken}}"
+}
+
+### 2.4 Logout
+POST {{baseUrl}}/api/auth/logout
+Content-Type: application/json
+
+{
+  "refresh_token": "{{refreshToken}}"
+}
+
+### ==========================================
+### 3. BLOGS
+### ==========================================
+
+### 3.1 Get All Blogs (Public - with pagination)
+GET {{baseUrl}}/api/blogs?page=1&per_page=15
+
+### 3.2 Get Single Blog (Public - replace with actual ID)
+GET {{baseUrl}}/api/blogs/blog_1738184400000
+
+### 3.3 Create Blog (Protected)
+POST {{baseUrl}}/api/blogs
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "title": "Getting Started with Go and React",
+  "excerpt": "A comprehensive guide to building full-stack applications with Go backend and React frontend",
+  "date": "2026-01-30",
+  "slug": "getting-started-go-react",
+  "blocks": [
+    {
+      "id": "block1",
+      "type": "paragraph",
+      "data": {
+        "text": "In this tutorial, we'll build a complete full-stack application."
+      }
+    },
+    {
+      "id": "block2",
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Setting Up the Backend"
+      }
+    },
+    {
+      "id": "block3",
+      "type": "list",
+      "data": {
+        "items": [
+          "Install Go 1.21 or higher",
+          "Setup MySQL database",
+          "Configure environment variables"
+        ]
+      }
+    },
+    {
+      "id": "block4",
+      "type": "code",
+      "data": {
+        "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    fmt.Println(\"Hello, World!\")\n}",
+        "language": "go"
+      }
+    },
+    {
+      "id": "block5",
+      "type": "callout",
+      "data": {
+        "text": "Make sure to keep your JWT secret secure and never commit it to version control!"
+      }
+    }
+  ]
+}
+
+### 3.4 Update Blog (Protected - replace with actual ID)
+PUT {{baseUrl}}/api/blogs/blog_1738184400000
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "title": "Getting Started with Go and React - Updated",
+  "excerpt": "An updated comprehensive guide",
+  "date": "2026-01-30",
+  "slug": "getting-started-go-react-updated",
+  "blocks": [
+    {
+      "id": "block1",
+      "type": "paragraph",
+      "data": {
+        "text": "Updated content here."
+      }
+    }
+  ]
+}
+
+### 3.5 Delete Blog (Protected - replace with actual ID)
+DELETE {{baseUrl}}/api/blogs/blog_1738184400000
+Authorization: Bearer {{accessToken}}
+
+### ==========================================
+### 4. PROJECTS
+### ==========================================
+
+### 4.1 Get All Projects (Public - with pagination)
+GET {{baseUrl}}/api/projects?page=1&per_page=15
+
+### 4.2 Get Projects by Category (Public)
+GET {{baseUrl}}/api/projects?category=web
+
+### 4.3 Get Single Project (Public - replace with actual ID)
+GET {{baseUrl}}/api/projects/1
+
+### 4.4 Create Project (Protected)
+POST {{baseUrl}}/api/projects
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "name": "E-Commerce Platform",
+  "date": "2026-01-30",
+  "link": "https://github.com/username/ecommerce",
+  "tags": ["React", "Go", "PostgreSQL", "Stripe"],
+  "desc": "A full-featured e-commerce platform with payment integration, inventory management, and admin dashboard. Built with React for the frontend and Go for the backend API.",
+  "image": "https://res.cloudinary.com/demo/image/upload/sample.jpg",
+  "category": "web"
+}
+
+### 4.5 Update Project (Protected - replace with actual ID)
+PUT {{baseUrl}}/api/projects/2
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "name": "E-Commerce Platform v2",
+  "date": "2026-01-30",
+  "link": "https://github.com/username/ecommerce-v2",
+  "tags": ["React", "Go", "PostgreSQL", "Stripe", "Redis"],
+  "desc": "Updated with caching and improved performance",
+  "image": "https://res.cloudinary.com/demo/image/upload/updated.jpg",
+  "category": "web"
+}
+
+### 4.6 Delete Project (Protected - replace with actual ID)
+DELETE {{baseUrl}}/api/projects/1
+Authorization: Bearer {{accessToken}}
+
+### ==========================================
+### 5. SKILLS
+### ==========================================
+
+### 5.1 Get All Skills (Public)
+GET {{baseUrl}}/api/skills
+
+### 5.2 Get Skills by Category (Public)
+GET {{baseUrl}}/api/skills?category=Frontend
+
+### 5.3 Get Single Skill (Public - replace with actual ID)
+GET {{baseUrl}}/api/skills/skill_1738184400000
+
+### 5.4 Create Skill (Protected)
+POST {{baseUrl}}/api/skills
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "name": "TypeScript",
+  "icon": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"#3178c6\" d=\"M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z\"/></svg>",
+  "category": "Frontend"
+}
+
+### 5.5 Update Skill (Protected - replace with actual ID)
+PUT {{baseUrl}}/api/skills/skill_1738184400000
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "name": "TypeScript 5.0",
+  "icon": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"#3178c6\" d=\"M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z\"/></svg>",
+  "category": "Programming Language"
+}
+
+### 5.6 Delete Skill (Protected - replace with actual ID)
+DELETE {{baseUrl}}/api/skills/skill_1738184400000
+Authorization: Bearer {{accessToken}}
+
+### ==========================================
+### 6. SOCIAL LINKS
+### ==========================================
+
+### 6.1 Get All Socials (Public)
+GET {{baseUrl}}/api/socials
+
+### 6.2 Get Socials by Platform (Public)
+GET {{baseUrl}}/api/socials?platform=github
+
+### 6.3 Get Single Social (Public - replace with actual ID)
+GET {{baseUrl}}/api/socials/social_1738184400000
+
+### 6.4 Create Social (Protected)
+POST {{baseUrl}}/api/socials
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "name": "GitHub",
+  "url": "https://github.com/yourusername",
+  "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z\"/></svg>",
+  "platform": "github"
+}
+
+### 6.5 Update Social (Protected - replace with actual ID)
+PUT {{baseUrl}}/api/socials/social_1738184400000
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "name": "GitHub Profile",
+  "url": "https://github.com/newusername",
+  "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z\"/></svg>",
+  "platform": "github"
+}
+
+### 6.6 Delete Social (Protected - replace with actual ID)
+DELETE {{baseUrl}}/api/socials/social_1738184400000
+Authorization: Bearer {{accessToken}}
+
+### ==========================================
+### 7. EXPERIENCES
+### ==========================================
+
+### 7.1 Get All Experiences (Public)
+GET {{baseUrl}}/api/experiences
+
+### 7.2 Get Single Experience (Public - replace with actual ID)
+GET {{baseUrl}}/api/experiences/exp_1738184400000
+
+### 7.3 Create Experience (Protected)
+POST {{baseUrl}}/api/experiences
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "company": "Tech Innovations Ltd",
+  "position": "Senior Full Stack Developer",
+  "start_date": "2024-01",
+  "end_date": "Present",
+  "description": "Leading the development of microservices architecture using Go and React. Implemented CI/CD pipelines reducing deployment time by 60%. Mentored 5 junior developers and conducted weekly code reviews. Architected and deployed scalable solutions handling 1M+ daily users.",
+  "technologies": ["Go", "React", "TypeScript", "Docker", "Kubernetes", "PostgreSQL", "Redis"],
+  "location": "Lagos, Nigeria (Remote)"
+}
+
+### 7.4 Update Experience (Protected - replace with actual ID)
+PUT {{baseUrl}}/api/experiences/exp_1738184400000
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "company": "Tech Innovations Ltd",
+  "position": "Lead Full Stack Developer",
+  "start_date": "2024-01",
+  "end_date": "Present",
+  "description": "Promoted to Lead Developer. Now managing a team of 10 developers while continuing hands-on development.",
+  "technologies": ["Go", "React", "TypeScript", "Docker", "Kubernetes", "PostgreSQL", "Redis", "AWS"],
+  "location": "Lagos, Nigeria (Hybrid)"
+}
+
+### 7.5 Delete Experience (Protected - replace with actual ID)
+DELETE {{baseUrl}}/api/experiences/exp_1738184400000
+Authorization: Bearer {{accessToken}}
+
+### ==========================================
+### 8. FILE UPLOAD
+### ==========================================
+
+### 8.1 Upload Image (Protected)
+### NOTE: For file uploads, use Postman, Insomnia, or curl command:
+### 
+### curl -X POST http://localhost:8080/api/upload/image \
+###   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
+###   -F "file=@/path/to/your/image.jpg"
+###
+### The image will be uploaded to Cloudinary and optimized to < 150KB
+
+POST {{baseUrl}}/api/upload/image
+Authorization: Bearer {{accessToken}}
+Content-Type: multipart/form-data
+
+### ==========================================
+### TESTING INSTRUCTIONS
+### ==========================================
+
+### Step 1: Start your Go server
+###   cd portfolio-backend
+###   go run main.go
+
+### Step 2: Test Health Check (#1)
+
+### Step 3: Setup Admin (Run #2.1 ONLY ONCE)
+
+### Step 4: Login (#2.2)
+###   - Copy the access_token from response
+###   - Copy the refresh_token from response
+###   - Update @accessToken and @refreshToken at the top
+
+### Step 5: Test Public Routes
+###   - Get All Blogs (#3.1)
+###   - Get All Projects (#4.1)
+###   - Get All Skills (#5.1)
+###   - Get All Socials (#6.1)
+###   - Get All Experiences (#7.1)
+
+### Step 6: Test Protected Routes
+###   - Create Blog (#3.3)
+###   - Create Project (#4.4)
+###   - Create Skill (#5.4)
+###   - Create Social (#6.4)
+###   - Create Experience (#7.3)
+
+### Step 7: Copy IDs from create responses
+###   - Update the ID placeholders in update/delete requests
+
+### Step 8: Test Update and Delete operations
+
+### Step 9: Test Image Upload using curl
+
+### Step 10: Test Token Refresh (#2.3)
+
+### Step 11: Test Logout (#2.4)
