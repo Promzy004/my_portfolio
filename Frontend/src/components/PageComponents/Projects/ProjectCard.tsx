@@ -12,10 +12,10 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC <ProjectCardProps> = ({darkMode, projectImage, projectName, projectDate, projectTags, projectLink, projectDesc }) => {
     return (
-        <div className="relative overflow-hidden h-[420px] w-full rounded-[20px] bg-white drop-shadow-sm">
+        <div className="relative overflow-hidden h-[420px] w-full rounded-[20px] bg-white drop-shadow-sm flex flex-col">
 
             {/* project image */}
-            <div className="h-[180px] sm:h-[50%] cursor-pointer overflow-hidden bg-primary">
+            <div className="h-[180px] cursor-pointer overflow-hidden bg-primary shrink-0">
                 <img                     
                     src={projectImage}
                     alt={`image of ${projectName} project`}
@@ -25,9 +25,9 @@ const ProjectCard: React.FC <ProjectCardProps> = ({darkMode, projectImage, proje
             </div>
 
             {/* project details */}
-            <div className="dark:bg-[#111] flex flex-col justify-between h-[50%] px-6 pt-8 pb-6">
+            <div className="dark:bg-[#111] flex flex-col justify-between flex-1 px-6 pt-6 pb-5 overflow-hidden">
                 <div>
-                    <div className="flex gap-5 justify-between items-center">
+                    <div className="flex gap-4 sm:gap-5 justify-between items-center">
                         <div className="flex flex-col gap-1">
                             <h3 className="text-lg sm:text-xl font-extrabold">{projectName}</h3>
                             <p className="text-xs font-normal">{projectDate}</p>
