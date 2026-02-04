@@ -1,14 +1,15 @@
 import React, { useState } from "react"
 import AdminSidebar from "./AdminSidebar"
+import { useAuthStore } from "@/store/useAuthStore"
 
 interface AdminLayoutProps {
   children: React.ReactNode
   darkMode: boolean
-  onLogout: () => void
 }
 
-const AdminLayout: React.FC<AdminLayoutProps> = ({ children, darkMode, onLogout }) => {
+const AdminLayout: React.FC<AdminLayoutProps> = ({ children, darkMode }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+    const logout = useAuthStore((state) => state.logout)
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen)
@@ -24,7 +25,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, darkMode, onLogout 
         <div className="mr-64">
             <AdminSidebar
                 darkMode={darkMode}
-                onLogout={onLogout}
+                onLogout={logout}
                 isOpen={isSidebarOpen}
                 onClose={closeSidebar}
             />

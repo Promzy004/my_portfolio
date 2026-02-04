@@ -6,6 +6,7 @@ import Blog from "@/pages/Blog"
 import BlogDetails from "./pages/BlogDetails"
 import Admin from "./pages/Admin"
 import MainLayout from "./MainLayout"
+import Toast from "./components/GlobalComponents/Toast/Toast"
 
 // Lazy load all pages (except critical ones if needed)
 const Home = lazy(() => import("./pages/Home"))
@@ -44,6 +45,7 @@ function App () {
   return (
     <div className="relative font-mullish flex flex-col items-center gap-10 xs:gap-12 bg-[#F8F2F2] text-[#090909] dark:bg-[#090909] dark:text-[#FAFAFA] min-h-screen">
       <RouteChangeProgress />
+      <Toast/>
       <ThemeToggleBtn darkMode={darkMode} setDarkMode={setDarkMode} />
 
       <main className="w-full flex-1">

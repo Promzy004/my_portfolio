@@ -51,7 +51,18 @@ export const useAuthStore = create<AuthState>()(
           }
         } catch (error) {
           const errorMessage = getErrorMessage(error);
-          set({ loading: false, error: errorMessage });
+
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('refresh_token');
+
+          set({ 
+            loading: false, 
+            error: errorMessage, 
+            user: null,
+            accessToken: null, 
+            refreshToken: null 
+          });
+
           throw error;
         }
       },

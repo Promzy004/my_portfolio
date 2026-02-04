@@ -1,35 +1,62 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react";
+import { useAuthStore } from "@/store/useAuthStore"
+import { useToastStore } from "@/store/useToastStore"
+import { useNavigate } from "react-router-dom"
 
 interface AdminLoginProps {
   darkMode: boolean
-  onLogin: (email: string, password: string) => void
 }
 
-const AdminLogin: React.FC<AdminLoginProps> = ({ darkMode, onLogin }) => {
+interface IValidation {
+  email: string,
+  password: string
+}
+
+const AdminLogin: React.FC<AdminLoginProps> = ({ darkMode }) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  const [ ValidationError, setValidationError ] = useState<IValidation>({
+    email: "",
+    password: ""
+  })
 
+  const login = useAuthStore((state) => state.login)
+  const loading = useAuthStore((state) => state.loading)
+  const authError = useAuthStore((state) => state.error)
+  const showToast = useToastStore((state) => state.showToast)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    // Clear error when component unmounts or mounts
+    return () => {
+      useAuthStore.getState().clearError()
+    }
+  }, [])
+
+  // function handling form submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError("")
-    setLoading(true)
-
-    // Basic validation
+  
+    //validates email and password
     if (!email || !password) {
-      setError("Please fill in all fields")
-      setLoading(false)
+      setValidationError({
+        email: !email ? "email is required" : "",
+        password: !password ? "password is required" : ""
+      })
       return
+    } else {
+      setValidationError({ email: "", password: "" })
     }
-
+  
+    console.log("Before login - loading:", loading)
     try {
-      // Call the parent onLogin handler (will be connected to backend later)
-      await onLogin(email, password)
-    } catch (err) {
-      setError("Invalid credentials")
-    } finally {
-      setLoading(false)
+      await login({ email, password })
+      showToast("Login successful!", "success")
+      navigate("/admin")
+    } catch (error) {
+      showToast("Invalid credentials. Please try again.", "error")
+      console.log("After error - loading:", useAuthStore.getState().loading) 
+      console.log(error)
     }
   }
 
@@ -55,9 +82,9 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ darkMode, onLogin }) => {
         </div>
 
         {/* Error Message */}
-        {error && (
+        {(authError || ValidationError.email || ValidationError.password) && (
           <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20">
-            <p className="text-sm text-red-500">{error}</p>
+            <p className="text-sm text-red-500">{authError || ValidationError.email || ValidationError.password}</p>
           </div>
         )}
 

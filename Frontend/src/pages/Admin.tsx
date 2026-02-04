@@ -11,14 +11,16 @@ import ExperienceManager from "@/components/PageComponents/Admin/ExperienceManag
 import { blogData } from "@/data/BlogData"
 import type { BlogPost } from "@/types/blog"
 import type { Project, Skill, Social, Experience } from "@/types/admin-types"
+import { useAuthStore } from "@/store/useAuthStore"
 
 interface AdminProps {
   darkMode: boolean
 }
 
 const Admin: React.FC<AdminProps> = ({ darkMode }) => {
-  // Authentication state (will be connected to backend later)
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+  const user = useAuthStore((state) => state.user)
+  const isAuthenticated = !!user
 
   // Data state (will be connected to backend later)
   const [blogs, setBlogs] = useState<BlogPost[]>(blogData)
@@ -27,18 +29,6 @@ const Admin: React.FC<AdminProps> = ({ darkMode }) => {
   const [socials, setSocials] = useState<Social[]>([])
   const [experiences, setExperiences] = useState<Experience[]>([])
 
-  // Authentication handlers
-  const handleLogin = async (email: string, password: string) => {
-    // TODO: Connect to backend authentication
-    // For now, just simulate login
-    console.log("Login attempt:", email, password)
-    setIsAuthenticated(true)
-  }
-
-  const handleLogout = () => {
-    setIsAuthenticated(false)
-    // TODO: Clear authentication tokens
-  }
 
   // Blog handlers
   const handleSaveBlog = (blog: BlogPost) => {
@@ -134,12 +124,12 @@ const Admin: React.FC<AdminProps> = ({ darkMode }) => {
 
   // If not authenticated, show login page
   if (!isAuthenticated) {
-    return <AdminLogin darkMode={darkMode} onLogin={handleLogin} />
+    return <AdminLogin darkMode={darkMode} />
   }
 
   // Admin routes
   return (
-    <AdminLayout darkMode={darkMode} onLogout={handleLogout}>
+    <AdminLayout darkMode={darkMode}>
       <Routes>
         <Route
           path="/"
